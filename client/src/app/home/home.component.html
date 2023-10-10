@@ -1,0 +1,10 @@
+<div>
+  <div class="w-full h-[480px] mt-[] bg-no-repeat bg-cover bg-center" [ngStyle]="{'background-image': 'url(' + bg + ')'}">
+
+  </div>
+  <div>
+    <h1 *ngIf="userService.user$ | async as user">
+      {{user.email}}
+    </h1>
+  </div>
+</div>

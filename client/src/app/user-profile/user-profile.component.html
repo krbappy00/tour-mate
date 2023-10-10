@@ -1,0 +1,6 @@
+<div *ngIf="authService.isLoggedIn()">
+  <div *ngIf="userService.user$ | async as user">
+    <h1 class="text-black">{{user.name}}</h1>
+  </div>
+
+</div>

@@ -1,13 +1,18 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: ["./index.html",
-  "./src/**/*.{js,ts,jsx,tsx}"],
+module.exports = {
+  content: ["./src/**/*.{html,ts}",],
   theme: {
     extend: {
-      colors:{
-        'tgray':'#6F8B90'
-      }
+      colors: {
+        'mblue': '#00aff5',
+        'tmain':'#054652',
+        'tsec':'#6f8b90'
+      },
+      backgroundImage: {
+        'heroBg': "url('/client/src/assets/banner.svg')",
     },
   },
   plugins: [],
 }
+}
+
