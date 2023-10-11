@@ -11,6 +11,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { RouterModule, Routes } from '@angular/router';
+import { AddrideComponent } from './addride/addride.component';
+import { MapboxComponent } from './mapbox/mapbox.component';
 
 @NgModule({
   declarations: [
@@ -20,13 +23,16 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     RegistrationComponent,
     SearchComponent,
     NavbarComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    AddrideComponent,
+    MapboxComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

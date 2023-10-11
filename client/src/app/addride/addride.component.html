@@ -1,0 +1,37 @@
+<div class="w-[550px] mx-auto mt-12">
+  <h1 class="text-tmain font-extrabold text-4xl pl-4">Publish a ride</h1>
+  <h1 class="pl-4 mb-1 text-tsec text-xl">Enter your ride details to continue</h1>
+  <form class="p-4" action="" (ngSubmit)="onSubmit()" >
+    <input type="text" [(ngModel)]="startLocation" (input)="searchLocations()" class="mb-6 p-4 h-16 w-full rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="start " placeholder="Start location" id="">
+    <div *ngIf="onStartHide">
+      <div *ngFor="let start of startLocationsuggestions">
+        <div class="cursor-pointer" (click)="setStartLocation(start)">
+          <h1>{{ start.placeName }}</h1>
+        </div>
+      </div>
+    </div>
+    <app-mapbox></app-mapbox>
+    <input type="text" [(ngModel)]="endLocation" (input)="searchEndLocation()" class="mb-6 p-4 h-16 w-full rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="end " placeholder="End location" id="">
+    <div *ngIf="onEndHide">
+      <div *ngFor="let end of endLocationsuggestions">
+        <div class="cursor-pointer" (click)="setEndLocation(end)">
+          <h1>{{ end.placeName }}</h1>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="w-full mt-6 h-16 text-white bg-mblue rounded-xl">Add ride</button>
+
+  </form>
+</div>
+
+
+<!--
+<div class="flex gap-4">
+  <input type="text" [(ngModel)]="searchInput" (input)="searchLocations()" class="border-2" placeholder="From">
+    <div *ngFor="let suggestion of locationSuggestions">
+      <div class="cursor-pointer" (click)="setLocation(suggestion)">
+        <h1>{{ suggestion }}</h1>
+      </div>
+    </div>
+</div> -->
+

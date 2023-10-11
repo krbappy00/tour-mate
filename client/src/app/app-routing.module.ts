@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AddrideComponent } from './addride/addride.component';
+import { AuthGuard } from './authGuard/authGuard';
+import { MapboxComponent } from './mapbox/mapbox.component';
 
 const routes: Routes = [
   {
@@ -20,7 +23,18 @@ const routes: Routes = [
   },
   {
     path:"profile",
-    component:UserProfileComponent
+    component:UserProfileComponent,
+
+  },
+  {
+    path:"addride",
+    component:AddrideComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path:"map",
+    component:MapboxComponent,
+    canActivate:[AuthGuard]
   }
 ];
 
