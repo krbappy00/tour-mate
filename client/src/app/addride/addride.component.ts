@@ -48,8 +48,11 @@ export class AddrideComponent {
     });
   }
   setStartLocation(e:any){
-    this.startLocation = e.placeName;
+    // this.startLocation = e.placeName;
     this.locationService.setStartLocation(e)
+    this.locationService.getStartLocation().subscribe((data: any) => {
+      this.startLocation = data.placeName;
+    });
     this.onStartHide = false;
 
   }

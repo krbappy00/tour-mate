@@ -9,7 +9,7 @@ export class LocationService {
   private endLocationSubject: Subject<any> = new Subject<any>();
 
   setStartLocation(location: any) {
-    console.log(location)
+    console.log("location from markerset",location)
     this.startLocationSubject.next(location);
     console.log(this.startLocationSubject)
   }
