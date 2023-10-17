@@ -7,11 +7,16 @@ import { Observable, Subject } from 'rxjs';
 export class LocationService {
   private startLocationSubject: Subject<any> = new Subject<any>();
   private endLocationSubject: Subject<any> = new Subject<any>();
+  private onFocus: Subject<any> = new Subject<any>();
 
   setStartLocation(location: any) {
-    console.log("location from markerset",location)
     this.startLocationSubject.next(location);
-    console.log(this.startLocationSubject)
+  }
+  setOnFocus(field: any) {
+    this.onFocus.next(field);
+  }
+  getOnFocus(){
+    return this.onFocus.asObservable();
   }
 
   setEndLocation(location: any) {

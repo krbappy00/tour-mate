@@ -25,17 +25,27 @@ export class MapboxComponent implements OnInit {
     this.map = new mapboxgl.Map({
       accessToken: 'pk.eyJ1IjoiYXNpZnVycmFobWFucGlhbCIsImEiOiJjbG5qd29ldTEwMjdsMnBsazFsaW1xcm5rIn0.L5kKxav_0VTewsxlvWUS2g',
       container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v11',
+      style: 'mapbox://styles/mapbox/streets-v12',
       center: this.initialCenter,
-      zoom: 10,
+      zoom: 15,
     });
-
+    this.locationService.getOnFocus().subscribe((data: any) => {
+      if(data === 'start'){
+        this.locationService.getStartLocation().subscribe((data: any) => {
+          this.initialCenter = [data.coordinates[0], data.coordinates[1]];
+          (this.map as any).setCenter(this.initialCenter); // Use type assertion to setCenter
+          this.updateMarkerPosition(this.initialCenter);
+        });
+      } else {
+        this.locationService.getEndLocation().subscribe((data: any) => {
+          this.initialCenter = [data.coordinates[0], data.coordinates[1]];
+          (this.map as any).setCenter(this.initialCenter); // Use type assertion to setCenter
+          this.updateMarkerPosition(this.initialCenter);
+        })
+      }
+    })
     // Subscribe to startLocation changes
-    this.locationService.getStartLocation().subscribe((data: any) => {
-      this.initialCenter = [data.coordinates[0], data.coordinates[1]];
-      (this.map as any).setCenter(this.initialCenter); // Use type assertion to setCenter
-      this.updateMarkerPosition(this.initialCenter);
-    });
+
 
     // Add a draggable marker
     this.marker = new mapboxgl.Marker({ draggable: true })
@@ -72,10 +82,23 @@ export class MapboxComponent implements OnInit {
       const apiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${accessToken}`;
       this.http.get(apiUrl).subscribe((data: any) => {
         const placeName = data.features[0].place_name;
-        this.locationService.setStartLocation({
-          coordinates: [lng, lat],
-          placeName: placeName
-        });
+        this.locationService.getOnFocus().subscribe((data: any) => {
+          if(data === 'start'){
+            this.locationService.setStartLocation({
+              coordinates: [lng, lat],
+              placeName: placeName
+            });
+          } else {
+            this.locationService.setEndLocation({
+              coordinates: [lng, lat],
+              placeName: placeName
+            });
+          }
+        })
+        // this.locationService.setStartLocation({
+        //   coordinates: [lng, lat],
+        //   placeName: placeName
+        // });
       });
     }
 }

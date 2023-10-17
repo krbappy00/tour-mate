@@ -8,17 +8,26 @@ import { LocationService } from '../service/location/location.service';
   styleUrls: ['./addride.component.css']
 })
 export class AddrideComponent {
-  startLocation: string = '';
-  endLocation: string = '';
+  focus:string = '';
+  startLocation: string | null = null;
+  endLocation: string | null = null;
 
   startLocationsuggestions: any[] = [];
   endLocationsuggestions: any[] = [];
 
-  onStartHide:boolean=true;
-  onEndHide:boolean=true;
+  onStartHide:boolean=false;
+  onEndHide:boolean=false;
 
   constructor(private http: HttpClient,private locationService: LocationService) {}
 
+  startOnFocus() {
+    this.focus = 'start'
+    this.locationService.setOnFocus(this.focus);
+  }
+  endOnFocus(){
+    this.focus = 'end'
+    this.locationService.setOnFocus(this.focus);
+  }
   searchLocations() {
     // Make a request to Mapbox Geocoding API to get location suggestions
     const accessToken = 'pk.eyJ1IjoiYXNpZnVycmFobWFucGlhbCIsImEiOiJjbG5qd29ldTEwMjdsMnBsazFsaW1xcm5rIn0.L5kKxav_0VTewsxlvWUS2g';
@@ -47,19 +56,25 @@ export class AddrideComponent {
 
     });
   }
-  setStartLocation(e:any){
-    // this.startLocation = e.placeName;
-    this.locationService.setStartLocation(e)
+   setStartLocation(e: any) {
+    this.locationService.setStartLocation(e);
+    this.startLocation = e.placeName;
+    this.onStartHide = false;
     this.locationService.getStartLocation().subscribe((data: any) => {
       this.startLocation = data.placeName;
+      this.onStartHide = false;
     });
-    this.onStartHide = false;
-
   }
+
   setEndLocation(e:any){
-    this.endLocation = e.placeName;
     this.locationService.setEndLocation(e)
+    this.endLocation =e.placeName
     this.onEndHide = false
+    this.locationService.getEndLocation().subscribe((data: any) => {
+      this.endLocation = data.placeName;
+      this.onEndHide = false
+    })
+
 
   }
 
