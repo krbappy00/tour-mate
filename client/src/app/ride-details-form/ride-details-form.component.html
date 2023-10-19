@@ -1,3 +1,46 @@
-<p>ride-details-form works!</p>
-<app-navigation></app-navigation>
+<div class="w-[80%] flex mx-auto gap-24 mt-12">
+  <div class="w-[50vh]">
+    <form action="" (ngSubmit)="onSubmit()" class="">
+      <!-- <div>
+        <h1 class="text-tmain font-extrabold text-4xl">Publish a ride</h1>
+        <h1 class="mb-1 text-tsec text-xl">Enter your ride details to continue</h1>
+      </div> -->
+      <div>
+        <h1 class="mb-1 text-tsec text-xl">Select a date</h1>
+        <input type="date" [min]="minDate" [(ngModel)]="date" class=" mb-6 p-4 h-16 w-full rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="date" placeholder="Select date" id="">
+      </div>
+      <div>
+        <h1 class="mb-1 text-tsec text-xl">Select a time</h1>
+        <input type="time" [(ngModel)]="time" class=" mb-6 p-4 h-16 w-full rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="time" placeholder="Select time" >
+      </div>
+      <div>
+        <h1 class="mb-1 text-tsec text-xl">Available seats</h1>
+        <input type="number" min="0" [(ngModel)]="seat" class=" mb-6 p-4 h-16 w-full rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="seat" placeholder="Number of seats">
+      </div>
+      <div>
+        <h1 class="mb-1 text-tsec text-xl">Set your price per seat</h1>
+        <input type="number" [(ngModel)]="price" class=" mb-6 p-4 h-16 w-full rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="price" placeholder="$" id="">
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="flex items-center">
+          <h1 class="mb-1 text-tsec text-xl">Allow pet?</h1>
+          <input type="checkbox" [(ngModel)]="allowPet" name="" class="ml-2 w-6 h-6 rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="pet" placeholder="" id="">
+        </div>
+        <div class="flex items-center">
+          <h1 class="mb-1 text-tsec text-xl">Allow smoking?</h1>
+          <input type="checkbox" [(ngModel)]="allowSmoking" name="" class="ml-2 w-6 h-6 rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="smoke" placeholder="" id="">
+        </div>
+        <div class="flex items-center">
+          <h1 class="mb-1 text-tsec text-xl">Allow alcohol?</h1>
+          <input type="checkbox" [(ngModel)]="allowAlcohol" name="" class="ml-2 w-6 h-6 rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="alcohol" placeholder="" id="">
+        </div>
+      </div>
+      <button type="submit" class="w-full mt-6 h-16 text-white bg-mblue rounded-xl">Add ride</button>
+    </form>
+  </div>
+  <div class=" rounded-xl">
+    <app-navigation></app-navigation>
+  </div>
+
+</div>
 

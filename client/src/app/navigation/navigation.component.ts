@@ -1,6 +1,6 @@
 import { LocationService } from './../service/location/location.service';
 
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnInit, Renderer2, SimpleChanges } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 import { CoordinatesService } from '../service/coordinates.service';
@@ -10,8 +10,9 @@ import { CoordinatesService } from '../service/coordinates.service';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css']
 })
-export class NavigationComponent implements OnInit {
-  constructor(private coor:CoordinatesService,private locationService:LocationService) {}
+export class NavigationComponent implements OnInit,AfterViewInit {
+  mapContainer: any;
+  constructor(private coor:CoordinatesService,private locationService:LocationService,private renderer: Renderer2) {}
 
   initialCenter: [number, number] = [90.414391, 23.746466];
   map!: mapboxgl.Map; // Declare a map variable
@@ -22,19 +23,23 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit() {
     this.locationService.getStartLocation().subscribe((data) => {
-      console.log("from navi",data)
       this.startCoordinates =data.coordinates
     });
     this.locationService.getEndLocation().subscribe((data) => {
       this.endCoordinates = data.coordinates
     });
+
+
+  }
+  ngAfterViewInit(): void {
     this.locationService.getMapLoad().subscribe((data) => {
-      console.log(data)
       if(data){
         this.tryRenderMap()
       }
     })
+
   }
+
   tryRenderMap() {
     if (this.startCoordinates && this.endCoordinates) {
       this.mapRender();
@@ -45,6 +50,10 @@ export class NavigationComponent implements OnInit {
 
 
   private mapRender(){
+    const mapElement = document.getElementById('map');
+    if (mapElement) {
+      mapElement.innerHTML = '';
+    }
     this.map = new mapboxgl.Map({
       accessToken: 'pk.eyJ1IjoiYXNpZnVycmFobWFucGlhbCIsImEiOiJjbG5qd29ldTEwMjdsMnBsazFsaW1xcm5rIn0.L5kKxav_0VTewsxlvWUS2g',
       container: 'map',
@@ -58,6 +67,7 @@ export class NavigationComponent implements OnInit {
         accessToken: 'pk.eyJ1IjoiYXNpZnVycmFobWFucGlhbCIsImEiOiJjbG5qd29ldTEwMjdsMnBsazFsaW1xcm5rIn0.L5kKxav_0VTewsxlvWUS2g',
         unit: 'metric',
         profile: 'mapbox/driving-traffic',
+        alternatives: true
       });
 
       directions.setOrigin(this.startCoordinates);
