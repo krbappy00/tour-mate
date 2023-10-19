@@ -7,6 +7,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AddrideComponent } from './addride/addride.component';
 import { AuthGuard } from './authGuard/authGuard';
 import { MapboxComponent } from './mapbox/mapbox.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { RideDetailsFormComponent } from './ride-details-form/ride-details-form.component';
 
 const routes: Routes = [
   {
@@ -27,8 +29,18 @@ const routes: Routes = [
 
   },
   {
+    path:"nav",
+    component:NavigationComponent,
+
+  },
+  {
     path:"addride",
     component:AddrideComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path:"rideDetails",
+    component:RideDetailsFormComponent,
     canActivate:[AuthGuard]
   },
   {

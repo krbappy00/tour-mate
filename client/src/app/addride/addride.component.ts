@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { LocationService } from '../service/location/location.service';
 
 @Component({
@@ -9,8 +9,13 @@ import { LocationService } from '../service/location/location.service';
 })
 export class AddrideComponent {
   focus:string = '';
+
   startLocation: string | null = null;
   endLocation: string | null = null;
+
+  @Input() startCoordinates!: [number, number]
+  @Input() endCoordinates!:[number, number]
+  @Input() showRoute =false;
 
   startLocationsuggestions: any[] = [];
   endLocationsuggestions: any[] = [];
@@ -58,6 +63,7 @@ export class AddrideComponent {
   }
    setStartLocation(e: any) {
     this.locationService.setStartLocation(e);
+    this.startCoordinates = e.coordinates
     this.startLocation = e.placeName;
     this.onStartHide = false;
     this.locationService.getStartLocation().subscribe((data: any) => {
@@ -68,14 +74,13 @@ export class AddrideComponent {
 
   setEndLocation(e:any){
     this.locationService.setEndLocation(e)
+    this.endCoordinates = e.coordinates
     this.endLocation =e.placeName
     this.onEndHide = false
     this.locationService.getEndLocation().subscribe((data: any) => {
       this.endLocation = data.placeName;
       this.onEndHide = false
     })
-
-
   }
 
   onSubmit(){

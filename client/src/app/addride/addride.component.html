@@ -1,5 +1,4 @@
 <div class="w-[80%] flex mx-auto gap-24 mt-12">
-
   <div>
     <div class="w-[550px] mx-auto ">
       <h1 class="text-tmain font-extrabold text-4xl pl-4">Publish a ride</h1>
@@ -28,23 +27,13 @@
             </div>
           </div>
         </div>
-        <button type="submit" class="w-full mt-6 h-16 text-white bg-mblue rounded-xl">Add ride</button>
-
+        <button routerLink="/rideDetails" class="w-full mt-6 h-16 text-white bg-mblue rounded-xl">Add ride</button>
       </form>
     </div>
   </div>
   <app-mapbox></app-mapbox>
+  <app-navigation></app-navigation>
+
 </div>
 
-
-
-<!--
-<div class="flex gap-4">
-  <input type="text" [(ngModel)]="searchInput" (input)="searchLocations()" class="border-2" placeholder="From">
-    <div *ngFor="let suggestion of locationSuggestions">
-      <div class="cursor-pointer" (click)="setLocation(suggestion)">
-        <h1>{{ suggestion }}</h1>
-      </div>
-    </div>
-</div> -->
 

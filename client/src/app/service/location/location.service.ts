@@ -8,7 +8,14 @@ export class LocationService {
   private startLocationSubject: Subject<any> = new Subject<any>();
   private endLocationSubject: Subject<any> = new Subject<any>();
   private onFocus: Subject<any> = new Subject<any>();
+  private onMapLoad: Subject<any> = new Subject<any>();
 
+  setMapLoad(e:any) {
+    this.onMapLoad.next(e);
+  }
+  getMapLoad(){
+    return this.onMapLoad.asObservable();
+  }
   setStartLocation(location: any) {
     this.startLocationSubject.next(location);
   }

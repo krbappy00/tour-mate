@@ -14,6 +14,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AddrideComponent } from './addride/addride.component';
 import { MapboxComponent } from './mapbox/mapbox.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { RideDetailsFormComponent } from './ride-details-form/ride-details-form.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { MapboxComponent } from './mapbox/mapbox.component';
     NavbarComponent,
     UserProfileComponent,
     AddrideComponent,
-    MapboxComponent
+    MapboxComponent,
+    NavigationComponent,
+    RideDetailsFormComponent
   ],
   imports: [
     BrowserModule,
