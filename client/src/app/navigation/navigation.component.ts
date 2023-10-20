@@ -24,9 +24,18 @@ export class NavigationComponent implements OnInit,AfterViewInit {
   ngOnInit() {
     this.locationService.getStartLocation().subscribe((data) => {
       this.startCoordinates =data.coordinates
+      localStorage.removeItem('startPlaceName')
+      localStorage.removeItem('startCoordinates')
+      localStorage.setItem('startPlaceName',JSON.stringify(data.placeName))
+      localStorage.setItem('startCoordinates',JSON.stringify(this.startCoordinates))
     });
     this.locationService.getEndLocation().subscribe((data) => {
       this.endCoordinates = data.coordinates
+      localStorage.removeItem('endPlaceName')
+      localStorage.removeItem('endCoordinates')
+      localStorage.setItem('endPlaceName',JSON.stringify(data.placeName))
+      localStorage.setItem('endCoordinates',JSON.stringify(this.endCoordinates))
+
     });
 
 

@@ -9,6 +9,7 @@ export const registerUser = async (req: Request, res: Response, next: NextFuncti
     
     try {
         const { email, password } = req.body;
+        
 
         const alreadyHave = await getUserByEmailFromDB(email);
         if (alreadyHave) {
