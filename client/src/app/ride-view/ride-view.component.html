@@ -1,0 +1,50 @@
+<div class="mt-4">
+  <app-search></app-search>
+</div>
+<div class="bg-[#F6F8F9] border-t mt-8">
+  <div class=" w-[60%] flex mx-auto">
+    <div></div>
+    <div class="w-[40%] mt-8">
+
+    </div>
+    <div class="w-[60%] mt-8">
+      <div>
+        <div *ngFor="let ride of searchRideData">
+          <div class="w-full h-[220px] rounded-xl shadow-md hover:shadow-lg mb-4 border p-4">
+            <div class="flex gap-2">
+              <div class="">
+                <h1 class="text-tmain text-xl">{{ride.time}}</h1>
+                <h1 class="text-tsec text-sm">{{ride.estimateDuration}}</h1>
+                <h1 class="text-tmain text-xl mt-10">{{ride.estimateTime}}</h1>
+              </div>
+              <div>
+                <div class="flex flex-col items-center justify-center">
+                  <div class="border-[4px] h-4 w-4 rounded-full border-tmain mt-[7px]"></div>
+                  <div class="w-[4px] h-[73px] bg-tmain"></div>
+                  <div class="border-[4px] h-4 w-4 rounded-full border-tmain"></div>
+                </div>
+              </div>
+              <div>
+                <div class="">
+                  <h1 class="text-tmain text-xl font-semibold">{{ride.startPlaceName}}</h1>
+                  <div class="flex gap-2 mt-[16px]">
+                    <div *ngFor="let i of range(ride.seat)">
+                      <div>
+                        <img src="../../assets/seat.svg" alt="">
+                      </div>
+                    </div>
+                  </div>
+                  <h1 class="text-tmain text-xl mt-[15px] font-semibold">{{ride.endPlaceName}}</h1>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

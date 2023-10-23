@@ -21,7 +21,9 @@
             ],
             "allowedCommonJsDependencies": [
               "lodash",
-              "mapbox-gl"
+              "mapbox-gl",
+              "mapbox-gl-directions",
+              "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions"
            ],
             "tsConfig": "tsconfig.app.json",
             "assets": [

@@ -66,7 +66,7 @@ export class NavigationComponent implements OnInit,AfterViewInit {
     this.map = new mapboxgl.Map({
       accessToken: 'pk.eyJ1IjoiYXNpZnVycmFobWFucGlhbCIsImEiOiJjbG5qd29ldTEwMjdsMnBsazFsaW1xcm5rIn0.L5kKxav_0VTewsxlvWUS2g',
       container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v12',
+      style: 'mapbox://styles/asifurrahmanpial/clo1vea6q00hg01pfb6211d74',
       center: this.initialCenter,
       zoom: 15,
     });

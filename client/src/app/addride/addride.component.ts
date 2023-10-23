@@ -34,7 +34,6 @@ export class AddrideComponent {
     this.locationService.setOnFocus(this.focus);
   }
   searchLocations() {
-    // Make a request to Mapbox Geocoding API to get location suggestions
     const accessToken = 'pk.eyJ1IjoiYXNpZnVycmFobWFucGlhbCIsImEiOiJjbG5qd29ldTEwMjdsMnBsazFsaW1xcm5rIn0.L5kKxav_0VTewsxlvWUS2g';
     const apiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.startLocation}.json?access_token=${accessToken}`;
 
@@ -49,7 +48,6 @@ export class AddrideComponent {
     });
   }
   searchEndLocation() {
-    // Make a request to Mapbox Geocoding API to get location suggestions
     const accessToken = 'pk.eyJ1IjoiYXNpZnVycmFobWFucGlhbCIsImEiOiJjbG5qd29ldTEwMjdsMnBsazFsaW1xcm5rIn0.L5kKxav_0VTewsxlvWUS2g';
     const apiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.endLocation}.json?access_token=${accessToken}`;
 

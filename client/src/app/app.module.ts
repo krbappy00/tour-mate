@@ -16,6 +16,8 @@ import { AddrideComponent } from './addride/addride.component';
 import { MapboxComponent } from './mapbox/mapbox.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { RideDetailsFormComponent } from './ride-details-form/ride-details-form.component';
+import { DateInputDirective } from './customDirective/date-input.directive';
+import { RideViewComponent } from './ride-view/ride-view.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { RideDetailsFormComponent } from './ride-details-form/ride-details-form.
     AddrideComponent,
     MapboxComponent,
     NavigationComponent,
-    RideDetailsFormComponent
+    RideDetailsFormComponent,
+    DateInputDirective,
+    RideViewComponent
   ],
   imports: [
     BrowserModule,

@@ -19,10 +19,18 @@ export const registerRide = async (req: Request, res: Response, next: NextFuncti
     }
 }
 export const getRideBySearch = async (req: Request, res: Response, next: NextFunction) => {
+    const { startLong, startLat, endLong, endLat, date, seats } = req.query as Record<string, string>;
+
+      const startLongn = parseFloat(startLong);
+      const startLatn = parseFloat(startLat);
+      const endLongn = parseFloat(endLong);
+      const endLatn = parseFloat(endLat);
+      const daten = new Date(date);
+      const seatsn = parseInt(seats);
+      const queryn = {startLongn,startLatn,endLongn,endLatn,daten,seatsn};
+     
     try {
-        const { search } = req.body;
-        const rideData = await getRide(search);
-        console.log("from controller",rideData)
+        const rideData = await getRide(queryn);
         return res.status(200).json({
             status: "success",
             data:rideData

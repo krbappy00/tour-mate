@@ -58,6 +58,7 @@ export class RideDetailsFormComponent implements OnInit {
     })
   }
   onSubmit(){
+    console.log(this.rideData.time)
     const startPlaceName = localStorage.getItem('startPlaceName')
     const endPlaceName = localStorage.getItem('endPlaceName')
     const startCoordinates = localStorage.getItem('startCoordinates')

@@ -19,4 +19,15 @@ export interface Iride {
     },
     startPlaceName:String,
     endPlaceName:String
+    distanceFromUserStart?:Number
+    distanceFromUserEnd?:Number
 }
+
+export interface SearchQuery {
+    startLongn: number;
+    startLatn: number;
+    endLongn: number;
+    endLatn: number;
+    daten: Date;
+    seatsn:Number
+  }

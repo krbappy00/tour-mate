@@ -19,6 +19,15 @@ export const getUserByEmailFromDB = async (payload: string): Promise<IUser> => {
         throw err;
     }
 }
+export const getUserById = async (payload: string): Promise<IUser> => {
+    try {
+        const user = await User.findById({_id:payload});
+        // console.log(user)
+        return user as IUser;
+    } catch (err) {
+        throw err;
+    }
+}
 export const getAllUserFromDb =  ():string=>{
     try{
         // const alluser = await User.find();

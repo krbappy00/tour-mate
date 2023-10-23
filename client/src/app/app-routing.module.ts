@@ -9,6 +9,7 @@ import { AuthGuard } from './authGuard/authGuard';
 import { MapboxComponent } from './mapbox/mapbox.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { RideDetailsFormComponent } from './ride-details-form/ride-details-form.component';
+import { RideViewComponent } from './ride-view/ride-view.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,7 @@ const routes: Routes = [
   {
     path:"nav",
     component:NavigationComponent,
+    canActivate:[AuthGuard]
 
   },
   {
@@ -42,6 +44,10 @@ const routes: Routes = [
     path:"rideDetails",
     component:RideDetailsFormComponent,
     canActivate:[AuthGuard]
+  },
+  {
+    path:"viewRides",
+    component:RideViewComponent,
   },
   {
     path:"map",

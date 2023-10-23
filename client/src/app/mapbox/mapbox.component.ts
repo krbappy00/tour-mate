@@ -4,6 +4,12 @@ import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-direct
 
 import { LocationService } from '../service/location/location.service';
 import { HttpClient } from '@angular/common/http';
+// import { config } from 'dotenv';
+// config()
+// export const environment = {
+//   production: false,
+//   mapboxApi: process.env['MAPBOX_API'],
+// };
 
 @Component({
   selector: 'app-mapbox',
@@ -17,8 +23,8 @@ export class MapboxComponent implements OnInit {
   endCordinates:[any,any] = [90.4078, 23.7925];
   inputFocus: string  = 'start';
   initialCenter: [number, number] = [90.4078, 23.7925];
-  map!: mapboxgl.Map; // Declare a map variable
-  marker: mapboxgl.Marker | null = null; // Declare a marker variable
+  map!: mapboxgl.Map;
+  marker: mapboxgl.Marker | null = null;
 
   constructor(private http: HttpClient, private locationService: LocationService) {}
 
@@ -28,9 +34,9 @@ export class MapboxComponent implements OnInit {
 
   private initializeMap() {
     this.map = new mapboxgl.Map({
-      accessToken: 'pk.eyJ1IjoiYXNpZnVycmFobWFucGlhbCIsImEiOiJjbG5qd29ldTEwMjdsMnBsazFsaW1xcm5rIn0.L5kKxav_0VTewsxlvWUS2g',
+      accessToken:'pk.eyJ1IjoiYXNpZnVycmFobWFucGlhbCIsImEiOiJjbG5qd29ldTEwMjdsMnBsazFsaW1xcm5rIn0.L5kKxav_0VTewsxlvWUS2g',
       container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v12',
+      style: 'mapbox://styles/asifurrahmanpial/clo1vea6q00hg01pfb6211d74',
       center: this.initialCenter,
       zoom: 15,
     });
@@ -42,7 +48,7 @@ export class MapboxComponent implements OnInit {
         this.locationService.getStartLocation().subscribe((data: any) => {
           this.initialCenter = [data.coordinates[0], data.coordinates[1]];
           this.startCordinates = [data.coordinates[0], data.coordinates[1]];
-          (this.map as any).setCenter(this.initialCenter); // Use type assertion to setCenter
+          (this.map as any).setCenter(this.initialCenter);
           this.updateMarkerPosition(this.initialCenter);
           this.inputFocus = 'start'
         });
@@ -50,22 +56,22 @@ export class MapboxComponent implements OnInit {
         this.locationService.getEndLocation().subscribe((data: any) => {
           this.initialCenter = [data.coordinates[0], data.coordinates[1]];
           this.endCordinates = [data.coordinates[0], data.coordinates[1]];
-          (this.map as any).setCenter(this.initialCenter); // Use type assertion to setCenter
+          (this.map as any).setCenter(this.initialCenter);
           this.updateMarkerPosition(this.initialCenter);
           this.inputFocus = 'end'
         })
       }
     })
 
-    // Subscribe to startLocation changes
 
 
-    // Add a draggable marker
+
+
     this.marker = new mapboxgl.Marker({ draggable: true })
       .setLngLat(this.initialCenter)
       .addTo(this.map);
 
-    // Handle marker dragend event
+
     this.marker.on('dragend', () => {
       const newLocation = this.marker!.getLngLat();
       // this.locationService.setStartLocation({ coordinates: [newLocation.lng, newLocation.lat] });
@@ -76,22 +82,20 @@ export class MapboxComponent implements OnInit {
 
 
 
-  // Call this method whenever location data changes externally
+
   updateMap() {
     if (this.map) {
-      (this.map as any).setCenter(this.initialCenter); // Use type assertion to setCenter
+      (this.map as any).setCenter(this.initialCenter);
       this.updateMarkerPosition(this.initialCenter);
     }
   }
 
-  // Update the marker's position
   private updateMarkerPosition(coordinates: [number, number]) {
     if (this.marker) {
       this.marker.setLngLat(coordinates);
     }
   }
 
-    // Reverse geocode to get place name
     private getPlaceName(lng:number,lat:number) {
       const accessToken = 'pk.eyJ1IjoiYXNpZnVycmFobWFucGlhbCIsImEiOiJjbG5qd29ldTEwMjdsMnBsazFsaW1xcm5rIn0.L5kKxav_0VTewsxlvWUS2g';
       const apiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${accessToken}`;
