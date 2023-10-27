@@ -25,10 +25,12 @@ export class SearchComponent {
   startLocation: string | null = null;
   endLocation: string | null = null;
 
-  seat = 0;
+  seat = 1;
   date = new Date();
    // You can adjust the locale and format as needed
   baseUrl = 'http://localhost:5000/api/v1/ride/search-ride'
+
+  isLoading = false;
 
   searchStartLocations() {
     // Make a request to Mapbox Geocoding API to get location suggestions
@@ -70,6 +72,8 @@ export class SearchComponent {
   }
 
   onSubmit(){
+
+    this.isLoading = true;
     const dateString = this.date.toString();
     const params = new HttpParams()
       .set('startLong', this.startCoordinatesLong.toString())
@@ -78,11 +82,14 @@ export class SearchComponent {
       .set('endLat', this.endCoordinatesLat.toString())
       .set('date', dateString )
       .set('seats', this.seat.toString());
-    this.rideService.setRideSearch({startLocation:this.startLocation,endLocation:this.endLocation})
-    this.http.get(this.baseUrl, { params }).subscribe((data) => {
 
+    this.rideService.setRideSearch({startLocation:this.startLocation,endLocation:this.endLocation,date:this.date,seat:this.seat})
+
+    this.http.get(this.baseUrl, { params }).subscribe((data) => {
       this.rideService.setRideData(data)
+      this.isLoading = false;
       this.router.navigate(['viewRides'])
+
     });
   }
 

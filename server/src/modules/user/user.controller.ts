@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { createUserToDB,getUserByEmailFromDB } from "./user.service";
+import { createUserToDB,getUserByEmailFromDB, setProfilePicture } from "./user.service";
 import { encryptPassword, checkPassword } from "../../utils/password";
 import { getAuthToken } from "../../utils/authentication";
 
@@ -64,6 +64,23 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
         })
 
 
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            status: "error",
+            error
+        })
+    }
+}
+export const updateProfilePicture = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { userId, url } = req.body;
+        console.log(userId, url);
+        const user = await setProfilePicture(userId, url);
+        return res.status(200).json({
+            status: "success",
+            data: user
+        })
     } catch (error) {
         console.log(error);
         return res.status(500).json({

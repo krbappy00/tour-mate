@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RideDataService } from '../service/ride/ride-data.service';
+import { IUser } from '../interface/userInterface';
+import { UserService } from '../service/user/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ride-view',
@@ -7,27 +10,30 @@ import { RideDataService } from '../service/ride/ride-data.service';
   styleUrls: ['./ride-view.component.css']
 })
 export class RideViewComponent implements OnInit {
-  constructor(private rideService:RideDataService) { }
+  constructor(private rideService:RideDataService,private router:Router) { }
+
   searchRideData:any[] = []
-  serachRideStartEndName = {}
+  serachRideStartEndName:any = {}
+  isLoading = false;
   range(n: number): number[] {
     return [...Array(n).keys()];
   }
   ngOnInit(): void {
+    this.isLoading = true
     this.rideService.getRideData().subscribe(data => {
       if(data){
-        localStorage.removeItem('rideData')
-        localStorage.setItem('rideData',JSON.stringify(data.data))
-
+        this.searchRideData = data.data;
+        this.isLoading=false;
       }
     })
-    const rideData:any | null = (localStorage.getItem('rideData'))
-    this.searchRideData = JSON.parse(rideData);
-
     this.rideService.getRideSearch().subscribe(data=>{
       this.serachRideStartEndName = data;
-      console.log(data)
     })
+  }
+  navigateToCardView(rideData: any) {
+    rideData.searchSeatQuantity = this.serachRideStartEndName.seat;
+    const data = JSON.stringify(rideData);
+    this.router.navigate(['/rideDetailsView', rideData._id, data]);
   }
 
 }

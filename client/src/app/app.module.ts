@@ -18,9 +18,16 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { RideDetailsFormComponent } from './ride-details-form/ride-details-form.component';
 import { DateInputDirective } from './customDirective/date-input.directive';
 import { RideViewComponent } from './ride-view/ride-view.component';
+import { CardDetailsComponent } from './card-details/card-details.component';
+import { SplitPipe } from 'src/pipe/split.pipe';
+import { NavigationForRideViewComponent } from './navigation-for-ride-view/navigation-for-ride-view.component';
+import { NgxStripeElementLoadingTemplateDirective, NgxStripeModule } from 'ngx-stripe';
+import { environment } from 'environment';
+
 
 @NgModule({
   declarations: [
+    SplitPipe,
     AppComponent,
     HomeComponent,
     LoginComponent,
@@ -33,12 +40,15 @@ import { RideViewComponent } from './ride-view/ride-view.component';
     NavigationComponent,
     RideDetailsFormComponent,
     DateInputDirective,
-    RideViewComponent
+    RideViewComponent,
+    CardDetailsComponent,
+    NavigationForRideViewComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    NgxStripeModule.forRoot(environment.stripe.publicKey),
     HttpClientModule,
     RouterModule
   ],

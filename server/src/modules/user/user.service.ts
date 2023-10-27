@@ -28,6 +28,15 @@ export const getUserById = async (payload: string): Promise<IUser> => {
         throw err;
     }
 }
+export const setProfilePicture = async (userId:string,url:string):Promise<IUser>=>{
+    try{
+        const user = await User.findByIdAndUpdate(userId,{profile_pic_url:url},{new:true});
+
+        return user as IUser;
+    }catch(err){
+        throw err;
+    }
+}
 export const getAllUserFromDb =  ():string=>{
     try{
         // const alluser = await User.find();

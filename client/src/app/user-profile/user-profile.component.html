@@ -1,6 +1,10 @@
 <div *ngIf="authService.isLoggedIn()">
-  <div *ngIf="userService.user$ | async as user">
+  <div *ngIf="userService?.user$ | async as user">
     <h1 class="text-black">{{user.name}}</h1>
+    <div>
+      <img src="{{user.profile_pic_url}}" alt="profile_pic">
+    </div>
+    <input class='border' name='image' (change)="handleImage($event)" accept="image/*" type="file" required>
   </div>
 
 </div>

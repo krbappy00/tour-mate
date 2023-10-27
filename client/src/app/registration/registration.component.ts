@@ -14,11 +14,13 @@ import { IUser } from '../interface/userInterface';
 export class RegistrationComponent {
   baseUrl = 'http://localhost:5000/api/v1/user/register-user'
   formData:IUser = {
+    _id:'',
     name:'',
     email:'',
-    phone:'',
+    phone:0,
     password:'',
   }
+
   constructor(private http:HttpClient,private authService:AuthService,private userService:UserService){}
   onSubmit(){
      this.http.post(this.baseUrl, this.formData)
@@ -31,7 +33,7 @@ export class RegistrationComponent {
           console.log(error)
         }
       });
-      
+
   }
 
 

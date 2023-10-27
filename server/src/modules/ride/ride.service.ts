@@ -1,4 +1,4 @@
-import { addMinutesToTime, formatDurationToHoursAndMinutes } from "../../utils/duration";
+import { addMinutesToTime, dateFormate, formatDurationToHoursAndMinutes } from "../../utils/duration";
 import { getUserById } from "../user/user.service";
 import { Iride, SearchQuery } from "./ride.interface";
 import Ride from "./ride.models";
@@ -58,10 +58,12 @@ export const getRide = async (searchQuery: SearchQuery ): Promise<any> => {
           const rideStartCoordinates = `${ride.startCoordinates.coordinates[0]},${ride.startCoordinates.coordinates[1]}`;
           const rideEndCoordinates = `${ride.endCoordinates.coordinates[0]},${ride.endCoordinates.coordinates[1]}`;
           const rideDistanceUrl = `https://api.mapbox.com/directions/v5/${travelProfile}/${rideStartCoordinates};${rideEndCoordinates}?access_token=${mapboxAccessToken}`;
-
-          const rideDistanceUrlRes = await fetch(rideDistanceUrl)
-          const startRes = await fetch(userToStartURL)
-          const endRes = await fetch(userToEndURL)
+          
+          const [rideDistanceUrlRes,startRes, endRes] = await Promise.all([
+            fetch(rideDistanceUrl),
+            fetch(userToStartURL),
+            fetch(userToEndURL),
+          ])
 
           const rideDistance = await rideDistanceUrlRes.json();
           const estimateTime = addMinutesToTime(ride.time,rideDistance.routes[0].duration/60)
@@ -72,7 +74,8 @@ export const getRide = async (searchQuery: SearchQuery ): Promise<any> => {
             const distanceFromUserStart = sData.routes[0].distance / 1000;
             const distanceFromUserEnd = eData.routes[0].distance / 1000;
             const user = await getUserById(ride.userId)
-            return { ...ride, distanceFromUserStart: distanceFromUserStart, distanceFromUserEnd: distanceFromUserEnd,user:user,estimateTime:estimateTime,estimateDuration:estimateDuration };
+            const formateDate = dateFormate(ride.date)
+            return { ...ride,date:formateDate, distanceFromUserStart: distanceFromUserStart, distanceFromUserEnd: distanceFromUserEnd,user:user,estimateTime:estimateTime,estimateDuration:estimateDuration };
 
           } else {
             throw new Error('No route data found');

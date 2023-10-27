@@ -4,7 +4,7 @@
       <div class="flex ml-4 text-tsec">
         <div class="flex items-center gap-2">
           <div class="w-6 h-6 rounded-full bg-white border-[5px] border-tsec"></div>
-          <input [(ngModel)]="startLocation" (input)="searchStartLocations()" class=" h-16 outline-none placeholder:text-tsec placeholder:text-xl" type="text" name="start" placeholder="Leaving from..." id="">
+          <input required [(ngModel)]="startLocation" (input)="searchStartLocations()" class=" h-16 outline-none placeholder:text-tsec placeholder:text-xl" type="text" name="start" placeholder="Leaving from..." id="">
           <div class=" mt-4 absolute top-20  w-[518px] bg-[#ededed] rounded-xl border-2 border-mblue"  *ngIf="onStartHide">
             <div class="hover:bg-white rounded-xl"  *ngFor="let start of startLocationsuggestions">
               <div class="cursor-pointer ml-4" (click)="setStartLocation(start)">
@@ -19,7 +19,7 @@
         <div class="flex items-center gap-2">
           <div class="w-[1px] h-10 bg-gray-400"></div>
           <div class="ml-2 w-6 h-6 rounded-full bg-white border-[5px] border-tsec"></div>
-          <input [(ngModel)]="endLocation" (input)="searchEndLocations()" class=" h-16 outline-none placeholder:text-tsec placeholder:text-xl" type="text" name="end" placeholder="Going to..." id="">
+          <input required [(ngModel)]="endLocation" (input)="searchEndLocations()" class=" h-16 outline-none placeholder:text-tsec placeholder:text-xl" type="text" name="end" placeholder="Going to..." id="">
           <div class=" mt-4 absolute top-20  w-[518px] bg-[#ededed] rounded-xl border-2 border-mblue"  *ngIf="onEndHide">
             <div class="hover:bg-white rounded-xl"  *ngFor="let end of endLocationsuggestions">
               <div class="cursor-pointer ml-4" (click)="setEndLocation(end)">
@@ -33,19 +33,22 @@
         </div>
         <div class="flex items-center gap-2 ml-2">
           <div class="w-[1px] h-10 bg-gray-400"></div>
-          <input [(ngModel)]="date" class="ml-2 mr-4 h-16 outline-none placeholder:text-tsec placeholder:text-xl" name="date" type="date" appDateInput>
+          <input required [(ngModel)]="date" class="ml-2 mr-4 h-16 outline-none placeholder:text-tsec placeholder:text-xl" name="date" type="date" appDateInput>
           <div class="w-[1px] h-10 bg-gray-400"></div>
         </div>
         <div class=" flex items-center gap-2 ml-4">
 
           <img class="ml-2 w-8 h-8" src="../../assets/accs copy.svg" alt="">
-          <input [(ngModel)]="seat" class="w-12 h-16 outline-none placeholder:text-tsec placeholder:text-xl" type="number" name="seat"  [defaultValue]="1" min="1" id="">
+          <input required [(ngModel)]="seat" class="w-12 h-16 outline-none placeholder:text-tsec placeholder:text-xl" type="number" name="seat"  [defaultValue]="1" min="1" id="">
         </div>
-        <div>
-          <button type="submit" class="ml-[34px] w-56 h-16 text-white bg-mblue rounded-r-2xl">Search</button>
+        <div class="relative">
+          <svg *ngIf="isLoading" class="absolute animate-spin h-6 w-6 top-[20px] left-[70px] mr-3 border-x-2 rounded-full text-white" viewBox="0 0 24 24"></svg>
+          <button type="submit" class="ml-[34px] w-56 h-16 text-white bg-mblue rounded-r-2xl">  Search</button>
         </div>
       </div>
     </form>
+
+
 
   </div>
 </div>

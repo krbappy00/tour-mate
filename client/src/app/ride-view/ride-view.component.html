@@ -8,10 +8,21 @@
 
     </div>
     <div class="w-[60%] mt-8">
-      <div>
+      <div class="mb-4">
+        <h1 class="text-tmain text-xl font-semibold">{{searchRideData[0]?.date}}</h1>
+        <div class="text-tsec flex gap-2 mt-4">
+          <h1>{{serachRideStartEndName?.startLocation | split:',': 0}}</h1>
+          <img  src="../../assets/locationMark.svg" alt="">
+          <h1>{{serachRideStartEndName?.endLocation | split:',': 0}}:</h1>
+        </div>
+        <div>
+          <h1 class="text-tsec">{{searchRideData.length}} rides available</h1>
+        </div>
+      </div>
+      <div class="">
         <div *ngFor="let ride of searchRideData">
-          <div class="w-full h-[220px] rounded-xl shadow-md hover:shadow-lg mb-4 border p-4">
-            <div class="flex gap-2">
+          <div (click)="navigateToCardView(ride)" class="w-full rounded-xl shadow-md hover:shadow-xl mb-4 border p-[24px] hover:cursor-pointer">
+            <div class="flex gap-4">
               <div class="">
                 <h1 class="text-tmain text-xl">{{ride.time}}</h1>
                 <h1 class="text-tsec text-sm">{{ride.estimateDuration}}</h1>
@@ -26,20 +37,39 @@
               </div>
               <div>
                 <div class="">
-                  <h1 class="text-tmain text-xl font-semibold">{{ride.startPlaceName}}</h1>
+                  <h1 class="text-tmain text-xl font-semibold">{{ ride.startPlaceName | slice:0:35 }}{{ ride.startPlaceName.length > 35 ? '...' : '' }}</h1>
                   <div class="flex gap-2 mt-[16px]">
                     <div *ngFor="let i of range(ride.seat)">
                       <div>
-                        <img src="../../assets/seat.svg" alt="">
+                        <img src="../../assets/bookedSeat.svg" alt="">
                       </div>
                     </div>
                   </div>
-                  <h1 class="text-tmain text-xl mt-[15px] font-semibold">{{ride.endPlaceName}}</h1>
+                  <h1 class="text-tmain text-xl mt-[15px] font-semibold">{{ ride.endPlaceName | slice:0:35 }}{{ ride.endPlaceName.length > 35 ? '...' : '' }}</h1>
                 </div>
               </div>
-
+              <div>
+                <h1 class="text-tmain text-xl text-end font-semibold ml-24" id="priceId">${{ride.price}}</h1>
+              </div>
             </div>
+            <div class="mt-4 flex justify-between items-center">
+              <div class="flex gap-4 items-center">
+                <img class="w-12 h-12 rounded-full border-[3px] border-mblue" [src]="ride.user?.profile_pic_url ? ride.user.profile_pic_url : '../../assets/userAvater.svg'" alt="">
+                <div class="">
+                  <h1 class="text-tmain text-xl">{{ride.user?.name}}</h1>
+                  <div class="flex gap-2 items-center">
+                    <img src="../../assets/rating.svg" alt="">
+                    <h1 class="text-tmain text-sm">4.5</h1>
+                  </div>
 
+                </div>
+              </div>
+              <div class="flex gap-4 items-center">
+                  <img [src]="ride.allowPet ? '../../assets/allowPet.svg' : '../../assets/notPet.svg'" alt="">
+                  <img [src]="ride.allowAlcohol ? '../../assets/allowDrink.svg' : '../../assets/notDrink.svg'" alt="">
+                  <img [src]="ride.allowSmoking ? '../../assets/allowSmok.svg' : '../../assets/notSmok.svg'" alt="">
+              </div>
+            </div>
           </div>
         </div>
       </div>

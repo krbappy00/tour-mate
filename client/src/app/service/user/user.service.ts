@@ -18,6 +18,7 @@ export class UserService {
 
   setUser(user: IUser) {
     const userSerialized = JSON.stringify(user)
+    localStorage.removeItem('user')
     localStorage.setItem('user',userSerialized);
     this.userSubject.next(user);
 

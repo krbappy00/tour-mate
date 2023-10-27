@@ -1,5 +1,9 @@
 
 const { addMinutes, format, parse,formatDuration } = require("date-fns");
+export function dateFormate(date:any){
+  return format(new Date(date), "do MMMM");
+
+}
  
 export function addMinutesToTime(time:any, duration:any) {
     try {
@@ -36,9 +40,9 @@ export function formatDurationToHoursAndMinutes(seconds:any) {
     if (minutes > 0) {
       result.push(`${minutes}m`);
     }
-    if (second > 0) {
-      result.push(`${second}s`);
-    }
+    // if (second > 0) {
+    //   result.push(`${second}s`);
+    // }
   
     return result.join(' ');
   

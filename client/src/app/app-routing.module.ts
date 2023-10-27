@@ -10,6 +10,8 @@ import { MapboxComponent } from './mapbox/mapbox.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { RideDetailsFormComponent } from './ride-details-form/ride-details-form.component';
 import { RideViewComponent } from './ride-view/ride-view.component';
+import { CardDetailsComponent } from './card-details/card-details.component';
+import { NavigationForRideViewComponent } from './navigation-for-ride-view/navigation-for-ride-view.component';
 
 const routes: Routes = [
   {
@@ -53,6 +55,14 @@ const routes: Routes = [
     path:"map",
     component:MapboxComponent,
     canActivate:[AuthGuard]
+  },
+  {
+    path:'rideDetailsView/:id/:data',
+    component:CardDetailsComponent
+  },
+  {
+    path:'navigationForDetailsView/:start/:end',
+    component:NavigationForRideViewComponent
   }
 ];
 

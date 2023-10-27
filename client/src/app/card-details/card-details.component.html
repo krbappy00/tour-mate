@@ -1,0 +1,86 @@
+<script src="https://js.stripe.com/v3/"></script>
+<div class="w-[50%] mx-auto mt-8">
+  <div>
+    <div>
+      <h1 class="text-tmain text-4xl font-semibold text-center">{{rideData.date}}</h1>
+    </div>
+    <div class="w-[560px] mx-auto">
+      <div (click)="navigateToMap()" class="flex gap-4 mt-4 mx-auto p-4 cursor-pointer hover:bg-tthird hover:rounded-xl">
+        <div class="">
+          <h1 class="text-tmain text-xl">{{rideData.time}}</h1>
+          <h1 class="text-tsec text-sm">{{rideData.estimateDuration}}</h1>
+          <h1 class="text-tmain text-xl mt-10">{{rideData.estimateTime}}</h1>
+        </div>
+        <div>
+          <div class="flex flex-col items-center justify-center">
+            <div class="border-[4px] h-4 w-4 rounded-full border-tmain mt-[7px]"></div>
+            <div class="w-[4px] h-[73px] bg-tmain"></div>
+            <div class="border-[4px] h-4 w-4 rounded-full border-tmain"></div>
+          </div>
+        </div>
+        <div>
+            <h1 class="text-tmain text-xl font-semibold">{{rideData?.startPlaceName | split:',': 0}},{{rideData?.startPlaceName | split:',': 1}}</h1>
+            <div class="flex gap-2">
+              <img src="../../assets/walking.svg" alt="">
+              <h1 class="text-[#5CD166]">{{rideData.distanceFromUserStart}} Km from your departure</h1>
+            </div>
+            <div class="mt-[14px]">
+              <div class="flex gap-2">
+                <img src="../../assets/walking.svg" alt="">
+                <h1 class="text-[#5CD166]">{{rideData.distanceFromUserEnd}} Km from your arrival</h1>
+              </div>
+              <h1 class="text-tmain text-xl  font-semibold">{{rideData?.endPlaceName | split:',': 0}},{{rideData?.endPlaceName | split:',': 1}}</h1>
+            </div>
+
+          </div>
+        </div>
+        <div class="w-full h-[6px] rounded-full bg-[#ededed] mt-2 mb-4"></div>
+        <div class="flex justify-between p-4">
+          <h1 class="text-tsec text-xl ">Price for {{rideData.searchSeatQuantity}} passenger</h1>
+          <h1 class="font-semibold text-2xl text-tmain">${{rideData.price * rideData.searchSeatQuantity}}</h1>
+        </div>
+        <div class="w-full rounded-full h-[6px] bg-[#ededed] mt-2"></div>
+        <div>
+          <div class="flex justify-between items-center hover:bg-tthird hover:cursor-pointer mt-2 p-4 hover:rounded-xl">
+            <div class="">
+              <h1 class="text-tmain text-xl">{{rideData.user?.name}}</h1>
+              <div class="flex gap-2 items-center">
+                <img src="../../assets/rating.svg" alt="">
+                <h1 class="text-tmain text-sm mt-1">4.5 Ratings outof 5</h1>
+              </div>
+            </div>
+            <img class="w-12 h-12 rounded-full border-[3px] border-mblue object-cover" [src]="rideData.user?.profile_pic_url ? rideData.user.profile_pic_url : '../../assets/userAvater.svg'" alt="">
+        </div>
+        <div class="px-4 mt-2">
+          <div class="flex gap-4">
+            <img src="../../assets/verify.svg" alt="">
+            <h1 class="text-tsec">Verified Profile</h1>
+          </div>
+          <div class="flex gap-4 mt-2">
+            <img src="../../assets/rideNotCancel.svg" alt="">
+            <h1 class="text-tsec mb-2">Never cancels rides</h1>
+          </div>
+        </div>
+        <div class="w-full rounded-full h-[4px] bg-[#ededed] mt-4"></div>
+        <div class="p-4">
+          <div class="flex items-center gap-4 mb-4 mt-2">
+            <img [src]="rideData.allowPet ? '../../assets/allowPet.svg' : '../../assets/notPet.svg'" alt="">
+            <h1 class="text-tsec">{{rideData.allowPet ? ' Pets Allowed' :  'Pets Not Allowed'}}</h1>
+          </div>
+          <div class="flex items-center gap-4 mb-4">
+            <img [src]="rideData.allowAlcohol ? '../../assets/allowDrink.svg' : '../../assets/notDrink.svg'" alt="">
+            <h1 class="text-tsec">{{rideData.allowAlcohol ? ' Alcohol Allowed' :  'Alcohol Not Allowed'}}</h1>
+          </div>
+          <div class="flex items-center gap-4">
+            <img [src]="rideData.allowSmoking ? '../../assets/allowSmok.svg' : '../../assets/notSmok.svg'" alt="">
+            <h1 class="text-tsec">{{rideData.allowSmoking ? ' Smoking Allowed' :  'Smoking Not Allowed'}}</h1>
+          </div>
+        </div>
+        <div class="w-full rounded-full h-[4px] bg-[#ededed] mt-4"></div>
+        <div (click)="makePayment()" class="w-[30%] bg-mblue flex justify-center gap-2 items-center rounded-full p-4 mx-auto mt-8 cursor-pointer">
+          <img src="../../assets/book.svg" alt="">
+          <h1 class="text-white ">Book Now</h1>
+        </div>
+      </div>
+    </div>
+  </div>
