@@ -4,7 +4,7 @@ export interface Iride {
     userId: string,
     date: Date,
     time: Timestamp,
-    seat :Number,
+    seat :number,
     price:Number,
     allowPet:boolean,
     allowSmoking:Boolean,
@@ -21,6 +21,7 @@ export interface Iride {
     endPlaceName:String
     distanceFromUserStart?:Number
     distanceFromUserEnd?:Number
+    bookedSeat?:number
 }
 
 export interface SearchQuery {
@@ -31,3 +32,9 @@ export interface SearchQuery {
     daten: Date;
     seatsn:Number
   }
+
+export interface bookedRide {
+    userId: string,
+    rideId: string,
+    bookedSeat: number,
+}

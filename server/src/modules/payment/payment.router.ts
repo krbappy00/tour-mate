@@ -20,13 +20,12 @@ router.post("/create-checkout-session",cors(), async (req, res) => {
                     description:'Ride start location is '+rideData.startPlaceName+' and end location is '+rideData.endPlaceName + ' on '+rideData.date + ' at '+rideData.time,
                     images:['https://blog-cdn.el.olx.com.pk/wp-content/uploads/2023/01/03172036/Car-Pool.jpg']
                   },
-                },
-                
+                },              
                 quantity: 1,
               },
             ],
             mode: 'payment',
-            success_url: `${YOUR_DOMAIN}`,
+            success_url: `${YOUR_DOMAIN}thankyou`,
             cancel_url: `${YOUR_DOMAIN}`,
           });
         

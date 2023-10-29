@@ -1,7 +1,12 @@
+import axios from "axios";
 import { addMinutesToTime, dateFormate, formatDurationToHoursAndMinutes } from "../../utils/duration";
+import { fetchData } from "../../utils/fetchWithTimeOut";
 import { getUserById } from "../user/user.service";
-import { Iride, SearchQuery } from "./ride.interface";
-import Ride from "./ride.models";
+import { Iride, SearchQuery, bookedRide } from "./ride.interface";
+import Ride, { BookedRide } from "./ride.models";
+import mongoose from "mongoose";
+// import { fetch, setGlobalDispatcher, Agent } from 'undici'
+
 
 
 
@@ -58,18 +63,13 @@ export const getRide = async (searchQuery: SearchQuery ): Promise<any> => {
           const rideStartCoordinates = `${ride.startCoordinates.coordinates[0]},${ride.startCoordinates.coordinates[1]}`;
           const rideEndCoordinates = `${ride.endCoordinates.coordinates[0]},${ride.endCoordinates.coordinates[1]}`;
           const rideDistanceUrl = `https://api.mapbox.com/directions/v5/${travelProfile}/${rideStartCoordinates};${rideEndCoordinates}?access_token=${mapboxAccessToken}`;
-          
-          const [rideDistanceUrlRes,startRes, endRes] = await Promise.all([
-            fetch(rideDistanceUrl),
-            fetch(userToStartURL),
-            fetch(userToEndURL),
-          ])
-
-          const rideDistance = await rideDistanceUrlRes.json();
+ 
+          const rideDistance = await fetchData(rideDistanceUrl)
+          const sData = await fetchData(userToStartURL);
+          const eData = await fetchData(userToEndURL);
           const estimateTime = addMinutesToTime(ride.time,rideDistance.routes[0].duration/60)
           const estimateDuration = formatDurationToHoursAndMinutes(rideDistance.routes[0].duration)
-          const sData = await startRes.json();
-          const eData = await endRes.json();
+
           if (sData.routes && sData.routes.length > 0) {
             const distanceFromUserStart = sData.routes[0].distance / 1000;
             const distanceFromUserEnd = eData.routes[0].distance / 1000;
@@ -90,4 +90,44 @@ export const getRide = async (searchQuery: SearchQuery ): Promise<any> => {
       return results;
     } catch (error) {
       console.error('Error calculating distance and time from user end to ride end:', error);
-    }}
+    }
+  }
+
+export const addBookedRideToDb = async (bookedInformation:bookedRide):Promise<any>=>{
+  const rideId = bookedInformation.rideId;
+  try{
+    const findRideById = await Ride.findById(new mongoose.Types.ObjectId(rideId));
+    if(findRideById){
+      if(findRideById.bookedSeat){
+        if(findRideById.bookedSeat+bookedInformation.bookedSeat <= findRideById.seat){
+        findRideById.bookedSeat = findRideById.bookedSeat + bookedInformation.bookedSeat;
+        await findRideById.save();
+      } else {
+        throw new Error('Ride is full');
+      }
+    } else {
+      findRideById.bookedSeat = bookedInformation.bookedSeat;
+      await findRideById.save();
+    }
+  }
+      } catch (err){
+    console.log(err)
+  }
+  try {
+    const bookedRide = new BookedRide(bookedInformation);
+    await bookedRide.save();
+    return bookedRide;
+} catch (err) {
+    throw err;
+}
+}
+export const findRegisterdRideByuser = async(userId:string):Promise<any>=>{
+  console.log(userId)
+  try {
+    const ownRide = await Ride.find({userId:userId})
+    return ownRide
+  }
+  catch{
+  
+  }
+}

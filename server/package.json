@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.6.0",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "date-fns": "^2.30.0",
@@ -20,8 +21,10 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.1.0",
     "mongoose": "^7.5.3",
+    "node-fetch": "^3.3.2",
     "nodemon": "^3.0.1",
-    "stripe": "^14.1.0"
+    "stripe": "^14.1.0",
+    "undici": "^5.27.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

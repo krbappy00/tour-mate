@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { addRideToDb, getRide } from "./ride.service";
+import { addBookedRideToDb, addRideToDb, findRegisterdRideByuser, getRide } from "./ride.service";
+import { Query } from "mongoose";
 
 
 export const registerRide = async (req: Request, res: Response, next: NextFunction) => {    
@@ -38,6 +39,38 @@ export const getRideBySearch = async (req: Request, res: Response, next: NextFun
         
     } catch (error) {
         console.log(error);
+        return res.status(500).json({
+            status: "error",
+            error
+        })
+    }
+}
+
+export const bookedRide =async (req:Request,res:Response,next:NextFunction) => {    
+    try {
+        const bookedData = await addBookedRideToDb(req.body);
+        return res.status(200).json({
+            status: "success",
+            data:bookedData
+        })
+        
+    } catch (error) {
+        return res.status(500).json({
+            status: "error",
+            error
+        })
+    }
+
+}
+export const getRideByUser:any = async (req:Request,res:Response,next:NextFunction)=>{
+    const {userId} = req.query as Record<string, string>
+    try {
+        const ownRideData = await findRegisterdRideByuser(userId)
+        return res.status(200).json({
+            status:'sucess',
+            data:ownRideData
+        })
+    } catch (error) {
         return res.status(500).json({
             status: "error",
             error

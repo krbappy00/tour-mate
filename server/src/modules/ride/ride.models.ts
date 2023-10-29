@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { Iride } from "./ride.interface";
+import { Iride, bookedRide } from "./ride.interface";
 
 const locationSchema = new Schema({
     type: String,
@@ -23,8 +23,17 @@ const rideSchema = new Schema<Iride>({
     endCoordinates: { type: locationSchema, required: true, unique: false },
     startPlaceName: { type: String, required: true, unique: false },
     endPlaceName: { type: String, required: true, unique: false },
+    bookedSeat: { type: Number, required: false, unique: false },
 });
 
+const bookedRideSchema = new Schema <bookedRide>({
+    userId:{type:String,required:true},
+    rideId:{type:String,required:true},
+    bookedSeat:{type:Number,required:true}
+})
+
+export const BookedRide = model('BooKedRide', bookedRideSchema)
 const Ride = model("Ride", rideSchema);
+
 
 export default Ride;
