@@ -27,12 +27,14 @@
             </div>
           </div>
         </div>
-        <button routerLink="/rideDetails" class="w-full mt-6 h-16 text-white bg-mblue rounded-xl">Next</button>
+        <button (click)="onSubmit()" type="button" class="w-full mt-6 h-16 text-white bg-mblue rounded-xl">Next</button>
       </form>
     </div>
   </div>
   <app-mapbox></app-mapbox>
-  <app-navigation></app-navigation>
+  <div class="W-full h-full">
+    <app-navigation></app-navigation>
+  </div>
 
 </div>
 

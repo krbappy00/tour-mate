@@ -22,12 +22,12 @@
             <h1 class="text-tmain text-xl font-semibold">{{rideData?.startPlaceName | split:',': 0}},{{rideData?.startPlaceName | split:',': 1}}</h1>
             <div class="flex gap-2">
               <img src="../../assets/walking.svg" alt="">
-              <h1 class="text-[#5CD166]">{{rideData.distanceFromUserStart}} Km from your departure</h1>
+              <h1 class="text-[#5CD166]">{{rideData.distanceFromUserStart.toFixed(2)}} Km from your departure</h1>
             </div>
             <div class="mt-[14px]">
               <div class="flex gap-2">
                 <img src="../../assets/walking.svg" alt="">
-                <h1 class="text-[#5CD166]">{{rideData.distanceFromUserEnd}} Km from your arrival</h1>
+                <h1 class="text-[#5CD166]">{{rideData.distanceFromUserEnd.toFixed(2)}} Km from your arrival</h1>
               </div>
               <h1 class="text-tmain text-xl  font-semibold">{{rideData?.endPlaceName | split:',': 0}},{{rideData?.endPlaceName | split:',': 1}}</h1>
             </div>
@@ -36,12 +36,19 @@
         </div>
         <div class="w-full h-[6px] rounded-full bg-[#ededed] mt-2 mb-4"></div>
         <div class="flex justify-between p-4">
-          <h1 class="text-tsec text-xl ">Price for {{rideData.searchSeatQuantity}} passenger</h1>
-          <h1 class="font-semibold text-2xl text-tmain">${{rideData.price * rideData.searchSeatQuantity}}</h1>
+          <div class="flex gap-4">
+            <h1 class="text-tsec text-xl ">Price for {{seat}} passenger</h1>
+            <div class="flex gap-3 items-center">
+              <img class="cursor-pointer" *ngIf="this.seat <(rideData.seat - (rideData.bookedSeat? rideData.bookedSeat:0))" (click)="increaseSeat()" src="../../assets/plus.svg" alt="">
+              <h1 class="text-xl text-tsec border px-2 border-tsec">{{seat}}</h1>
+              <img class="cursor-pointer" *ngIf="this.seat >1" (click)="decreaseSeat()" src="../../assets/minus.svg" alt="">
+            </div>
+          </div>
+          <h1 class="font-semibold text-2xl text-tmain">${{rideData.price * seat}}</h1>
         </div>
         <div class="w-full rounded-full h-[6px] bg-[#ededed] mt-2"></div>
         <div>
-          <div class="flex justify-between items-center hover:bg-tthird hover:cursor-pointer mt-2 p-4 hover:rounded-xl">
+          <div (click)="navigateToRiderProfile()" class="flex justify-between items-center hover:bg-tthird hover:cursor-pointer mt-2 p-4 hover:rounded-xl">
             <div class="">
               <h1 class="text-tmain text-xl">{{rideData.user?.name}}</h1>
               <div class="flex gap-2 items-center">
@@ -52,13 +59,13 @@
             <img class="w-12 h-12 rounded-full border-[3px] border-mblue object-cover" [src]="rideData.user?.profile_pic_url ? rideData.user.profile_pic_url : '../../assets/userAvater.svg'" alt="">
         </div>
         <div class="px-4 mt-2">
-          <div class="flex gap-4">
+          <div class="flex gap-4 items-center">
             <img src="../../assets/verify.svg" alt="">
             <h1 class="text-tsec">Verified Profile</h1>
           </div>
-          <div class="flex gap-4 mt-2">
+          <div class="flex gap-4 mt-4 items-center">
             <img src="../../assets/rideNotCancel.svg" alt="">
-            <h1 class="text-tsec mb-2">Never cancels rides</h1>
+            <h1 class="text-tsec">Never cancels rides</h1>
           </div>
         </div>
         <div class="w-full rounded-full h-[4px] bg-[#ededed] mt-4"></div>
@@ -77,9 +84,10 @@
           </div>
         </div>
         <div class="w-full rounded-full h-[4px] bg-[#ededed] mt-4"></div>
-        <div (click)="makePayment()" class="w-[30%] bg-mblue flex justify-center gap-2 items-center rounded-full p-4 mx-auto mt-8 cursor-pointer">
-          <img src="../../assets/book.svg" alt="">
-          <h1 class="text-white ">Book Now</h1>
+        <div (click)="makePayment()" class="relative w-[30%] bg-mblue flex justify-center items-center rounded-full p-4 mx-auto mt-8 cursor-pointer">
+          <svg *ngIf="isLoading" class="absolute animate-spin h-6 w-6 top-[15px] left-[20px] mr-3 border-x-2 rounded-full text-white" viewBox="0 0 24 24"></svg>
+          <!-- <img src="../../assets/book.svg" alt=""> -->
+          <h1 class="text-white ml-4">Book Now</h1>
         </div>
       </div>
     </div>

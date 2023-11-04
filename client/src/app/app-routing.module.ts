@@ -12,62 +12,70 @@ import { RideDetailsFormComponent } from './ride-details-form/ride-details-form.
 import { RideViewComponent } from './ride-view/ride-view.component';
 import { CardDetailsComponent } from './card-details/card-details.component';
 import { NavigationForRideViewComponent } from './navigation-for-ride-view/navigation-for-ride-view.component';
+import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component';
+import { RiderProfileComponent } from './rider-profile/rider-profile.component';
 
 const routes: Routes = [
   {
-    path:'',
-    component:HomeComponent
+    path: '',
+    component: HomeComponent,
   },
   {
-    path:"login",
-    component:LoginComponent
+    path: 'login',
+    component: LoginComponent,
   },
   {
-    path:"registration",
-    component:RegistrationComponent
+    path: 'registration',
+    component: RegistrationComponent,
   },
   {
-    path:"profile",
-    component:UserProfileComponent,
-
+    path: 'profile',
+    component: UserProfileComponent,
   },
   {
-    path:"nav",
-    component:NavigationComponent,
-    canActivate:[AuthGuard]
-
+    path: 'nav',
+    component: NavigationComponent,
+    canActivate: [AuthGuard],
   },
   {
-    path:"addride",
-    component:AddrideComponent,
-    canActivate:[AuthGuard]
+    path: 'addride',
+    component: AddrideComponent,
+    canActivate: [AuthGuard],
   },
   {
-    path:"rideDetails",
-    component:RideDetailsFormComponent,
-    canActivate:[AuthGuard]
+    path: 'rideDetails/:start/:end',
+    component: RideDetailsFormComponent,
+    canActivate: [AuthGuard],
   },
   {
-    path:"viewRides",
-    component:RideViewComponent,
+    path: 'viewRides',
+    component: RideViewComponent,
   },
   {
-    path:"map",
-    component:MapboxComponent,
-    canActivate:[AuthGuard]
+    path: 'thankyou',
+    component: ThankYouPageComponent,
   },
   {
-    path:'rideDetailsView/:id/:data',
-    component:CardDetailsComponent
+    path: 'map',
+    component: MapboxComponent,
+    canActivate: [AuthGuard],
   },
   {
-    path:'navigationForDetailsView/:start/:end',
-    component:NavigationForRideViewComponent
-  }
+    path: 'rideDetailsView/:id/:data',
+    component: CardDetailsComponent,
+  },
+  {
+    path: 'navigationForDetailsView/:start/:end',
+    component: NavigationForRideViewComponent,
+  },
+  {
+    path: 'riderProfile/:id',
+    component: RiderProfileComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

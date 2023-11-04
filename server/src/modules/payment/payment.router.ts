@@ -5,7 +5,7 @@ const router = express.Router();
 const YOUR_DOMAIN = 'http://localhost:4200/';
 
 router.post("/create-checkout-session",cors(), async (req, res) => {
-    const {price,rideData}= req.body
+    const {price,seat,rideData}= req.body
     const amountToCharge = (price * 100)
 
     try {
@@ -16,7 +16,7 @@ router.post("/create-checkout-session",cors(), async (req, res) => {
                   unit_amount:amountToCharge,
                   currency :'usd',
                   product_data:{
-                    name:'Ticket price for '+rideData.searchSeatQuantity+' passenger',
+                    name:'Ticket price for '+seat+' passenger',
                     description:'Ride start location is '+rideData.startPlaceName+' and end location is '+rideData.endPlaceName + ' on '+rideData.date + ' at '+rideData.time,
                     images:['https://blog-cdn.el.olx.com.pk/wp-content/uploads/2023/01/03172036/Car-Pool.jpg']
                   },

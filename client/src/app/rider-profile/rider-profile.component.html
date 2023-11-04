@@ -1,0 +1,64 @@
+<div *ngIf="riderProfileData" class="w-[40%] border mx-auto" >
+  <div class="flex gap-4">
+    <div>
+      <img class="w-64 h-64 rounded-xl object-cover" [src]="riderProfileData?.profile_pic_url ? riderProfileData?.profile_pic_url : '../../assets/userAvater.svg'" alt="">
+    </div>
+    <div>
+      <div class="">
+        <h1 class="text-tmain text-2xl font-semibold">{{riderProfileData?.name}}</h1>
+        <div class="flex items-center gap-2 mt-1 ">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.653253 12.9524C0.46175 13.1514 0.46175 13.4739 0.653253 13.6729C0.844757 13.8718 1.15525 13.8718 1.34675 13.6729L0.653253 12.9524ZM8.06066 5.25702L0.653253 12.9524L1.34675 13.6729L8.75416 5.97748L8.06066 5.25702Z" fill="#00AFF5"/>
+            <line x1="0.5" y1="-0.5" x2="1.63625" y2="-0.5" transform="matrix(-0.653593 0.759656 -0.731227 -0.679004 8.555 9.46494)" stroke="#00AFF5" stroke-linecap="round"/>
+            <line x1="0.5" y1="-0.5" x2="3.78159" y2="-0.5" transform="matrix(-0.652205 0.758042 -0.73279 -0.680455 7.81658 10.2763)" stroke="#00AFF5" stroke-linecap="round"/>
+            <line x1="0.5" y1="-0.5" x2="4.84973" y2="-0.5" transform="matrix(-0.664239 0.74752 -0.721738 -0.692167 4.5535 13.9647)" stroke="#00AFF5" stroke-linecap="round"/>
+            <line x1="0.5" y1="-0.5" x2="3.78159" y2="-0.5" transform="matrix(-0.652205 0.758042 -0.73279 -0.680455 10.7795 12.5431)" stroke="#00AFF5" stroke-linecap="round"/>
+            <line x1="0.5" y1="-0.5" x2="4.84973" y2="-0.5" transform="matrix(-0.664239 0.74752 -0.721738 -0.692167 7.51646 16.2314)" stroke="#00AFF5" stroke-linecap="round"/>
+            <line x1="0.5" y1="-0.5" x2="3.78159" y2="-0.5" transform="matrix(-0.652205 0.758042 -0.73279 -0.680455 13.7425 13.3126)" stroke="#00AFF5" stroke-linecap="round"/>
+            <line x1="0.5" y1="-0.5" x2="4.84973" y2="-0.5" transform="matrix(-0.664239 0.74752 -0.721738 -0.692167 10.4794 17.001)" stroke="#00AFF5" stroke-linecap="round"/>
+            <line x1="0.5" y1="-0.5" x2="3.78159" y2="-0.5" transform="matrix(-0.652205 0.758042 -0.73279 -0.680455 18.187 13.3126)" stroke="#00AFF5" stroke-linecap="round"/>
+            <line x1="0.5" y1="-0.5" x2="4.84973" y2="-0.5" transform="matrix(-0.664239 0.74752 -0.721738 -0.692167 14.9239 17.001)" stroke="#00AFF5" stroke-linecap="round"/>
+            <path d="M14.3333 1L15.8301 5.78565H20.6737L16.7551 8.74334L18.2519 13.529L14.3333 10.5713L10.4148 13.529L11.9115 8.74334L7.99296 5.78565H12.8366L14.3333 1Z" stroke="#00AFF5" stroke-linejoin="round"/>
+            </svg>
+          <h1 class="text-tsec">Rising star</h1>
+        </div>
+        <div class="flex gap-4 mt-4 bg-[#efefef] p-4 rounded-md">
+          <div>
+            <h1 class="text-tmain text-xl">Ride</h1>
+            <h1 class="text-tsec">{{totalRide? totalRide:0}}</h1>
+          </div>
+          <div>
+            <h1 class="text-tmain text-xl">Cancel ride</h1>
+            <h1 class="text-tsec">0</h1>
+          </div>
+          <div>
+            <h1 class="text-tmain text-xl">Ratings</h1>
+            <h1 class="text-tsec">* 4.5</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div>
+    <div class="flex justify-between items-center hover:bg-tthird hover:cursor-pointer mt-2 p-4 hover:rounded-xl">
+      <div class="">
+        <h1 class="text-tmain text-xl">{{riderProfileData?.name}}</h1>
+        <div class="flex gap-2 items-center">
+          <img src="../../assets/rating.svg" alt="">
+          <h1 class="text-tmain text-sm mt-1">4.5 Ratings outof 5</h1>
+        </div>
+      </div>
+      <img class="w-24 h-24 rounded-full border-[3px] border-mblue object-cover" [src]="riderProfileData?.profile_pic_url ? riderProfileData?.profile_pic_url : '../../assets/userAvater.svg'" alt="">
+  </div>
+  <div class="px-4 mt-2">
+    <div class="flex gap-4 items-center">
+      <img src="../../assets/verify.svg" alt="">
+      <h1 class="text-tsec">Verified Profile</h1>
+    </div>
+    <div class="flex gap-4 mt-4 items-center">
+      <img src="../../assets/rideNotCancel.svg" alt="">
+      <h1 class="text-tsec">Never cancels rides</h1>
+    </div>
+  </div> -->
+
+</div>

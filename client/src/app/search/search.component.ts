@@ -72,7 +72,6 @@ export class SearchComponent {
   }
 
   onSubmit(){
-
     this.isLoading = true;
     const dateString = this.date.toString();
     const params = new HttpParams()
@@ -84,12 +83,10 @@ export class SearchComponent {
       .set('seats', this.seat.toString());
 
     this.rideService.setRideSearch({startLocation:this.startLocation,endLocation:this.endLocation,date:this.date,seat:this.seat})
-
     this.http.get(this.baseUrl, { params }).subscribe((data) => {
-      this.rideService.setRideData(data)
       this.isLoading = false;
+      this.rideService.setRideData(data)
       this.router.navigate(['viewRides'])
-
     });
   }
 

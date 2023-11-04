@@ -1,46 +1,65 @@
-<div class="w-[80%] flex mx-auto gap-24 mt-12">
-  <div class="w-[50vh]">
+<div class="w-[80%] mx-auto gap-24 mt-4">
+
+  <div class="w-[40%] mx-auto">
     <form action="" (ngSubmit)="onSubmit()" class="">
-      <!-- <div>
-        <h1 class="text-tmain font-extrabold text-4xl">Publish a ride</h1>
-        <h1 class="mb-1 text-tsec text-xl">Enter your ride details to continue</h1>
-      </div> -->
+      <div class="flex justify-between items-center">
+        <div>
+          <h1 class="text-tmain font-extrabold text-4xl">Publish a ride</h1>
+          <h1 class="mb-1 text-tsec text-xl">Enter your ride details to continue</h1>
+        </div>
+        <div>
+          <button (click)="viewNavigation()" class="px-4  mt-6 h-16 text-white bg-mblue rounded-xl">
+            <div class="flex items-center gap-2">
+              <svg width="23" height="27" viewBox="0 0 23 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21.5 9.80769C21.5 14.4046 11.5 25.5 11.5 25.5C11.5 25.5 1.5 14.4046 1.5 9.80769C1.5 7.60436 2.55357 5.49126 4.42893 3.93327C6.3043 2.37527 8.84784 1.5 11.5 1.5C14.1522 1.5 16.6957 2.37527 18.5711 3.93327C20.4464 5.49126 21.5 7.60436 21.5 9.80769Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M11.5 12.5769C13.341 12.5769 14.8333 11.3371 14.8333 9.80769C14.8333 8.27829 13.341 7.03846 11.5 7.03846C9.65905 7.03846 8.16667 8.27829 8.16667 9.80769C8.16667 11.3371 9.65905 12.5769 11.5 12.5769Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <h1 class="text-white">
+                View Navigation
+              </h1>
+            </div>
+
+          </button>
+        </div>
+      </div>
       <div>
         <h1 class="mb-1 text-tsec text-xl">Select a date</h1>
-        <input type="date" [min]="minDate" [(ngModel)]="rideData.date" class=" mb-6 p-4 h-16 w-full rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="date" placeholder="Select date" id="">
+        <input type="date" [min]="minDate" [(ngModel)]="rideData.date" class=" mb-6 p-4 h-16 w-full rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="date" placeholder="Select date" >
       </div>
       <div>
         <h1 class="mb-1 text-tsec text-xl">Select a time</h1>
-        <input type="time" [(ngModel)]="rideData.time" class=" mb-6 p-4 h-16 w-full rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="time" placeholder="Select time" >
+        <input type="time" [(ngModel)]="rideData.time" class="mb-6 p-4 h-16 w-full rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="time" placeholder="Select time" >
       </div>
-      <div>
-        <h1 class="mb-1 text-tsec text-xl">Available seats</h1>
-        <input type="number" min="0" [(ngModel)]="rideData.seat" class=" mb-6 p-4 h-16 w-full rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="seat" placeholder="Number of seats">
+      <div class="flex items-center justify-between w-full gap-4">
+        <div class="w-full">
+          <h1 class="mb-1 text-tsec text-xl">Available seats</h1>
+          <input type="number" min="0" [(ngModel)]="rideData.seat" class="w-full mb-6 p-4 h-16 rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="seat" placeholder="Number of seats">
+        </div>
+        <div class="w-full">
+          <h1 class="mb-1 text-tsec text-xl">Set your price per seat</h1>
+          <input type="number" [(ngModel)]="rideData.price" class="w-full mb-6 p-4 h-16 rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="price" placeholder="$" >
+        </div>
       </div>
-      <div>
-        <h1 class="mb-1 text-tsec text-xl">Set your price per seat</h1>
-        <input type="number" [(ngModel)]="rideData.price" class=" mb-6 p-4 h-16 w-full rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="price" placeholder="$" id="">
-      </div>
-      <div class="flex items-center gap-2">
-        <div class="flex items-center">
+
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex items-center justify-between gap-2">
           <h1 class="mb-1 text-tsec text-xl">Allow pet?</h1>
-          <input type="checkbox" [(ngModel)]="rideData.allowPet" name="" class="ml-2 w-6 h-6 rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="pet" placeholder="" id="">
+          <input type="checkbox" [(ngModel)]="rideData.allowPet" name="" class="ml-2 w-6 h-6 rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="pet" placeholder="" >
         </div>
         <div class="flex items-center">
           <h1 class="mb-1 text-tsec text-xl">Allow smoking?</h1>
-          <input type="checkbox" [(ngModel)]="rideData.allowSmoking" name="" class="ml-2 w-6 h-6 rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="smoke" placeholder="" id="">
+          <input type="checkbox" [(ngModel)]="rideData.allowSmoking" name="" class="ml-2 w-6 h-6 rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="smoke" placeholder="" >
         </div>
         <div class="flex items-center">
           <h1 class="mb-1 text-tsec text-xl">Allow alcohol?</h1>
-          <input type="checkbox" [(ngModel)]="rideData.allowAlcohol" name="" class="ml-2 w-6 h-6 rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="alcohol" placeholder="" id="">
+          <input type="checkbox" [(ngModel)]="rideData.allowAlcohol" name="" class="ml-2 w-6 h-6 rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="alcohol" placeholder="" >
         </div>
       </div>
-      <button type="submit" class="w-full mt-6 h-16 text-white bg-mblue rounded-xl">Add ride</button>
+      <div class="relative">
+        <svg *ngIf="isLoading" class="absolute animate-spin h-6 w-6 top-[42px] left-[160px] mr-3 border-x-2 rounded-full text-white" viewBox="0 0 24 24"></svg>
+        <button type="submit" class="w-full mt-6 h-16 text-white bg-mblue rounded-xl">Add ride</button>
+      </div>
     </form>
   </div>
-  <div class=" rounded-xl">
-    <app-navigation></app-navigation>
-  </div>
-
 </div>
 
