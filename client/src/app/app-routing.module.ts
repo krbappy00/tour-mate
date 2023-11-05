@@ -65,7 +65,7 @@ const routes: Routes = [
     component: CardDetailsComponent,
   },
   {
-    path: 'navigationForDetailsView/:start/:end',
+    path: 'navigationForDetailsView/:start/:end/:isRider/:id',
     component: NavigationForRideViewComponent,
   },
   {

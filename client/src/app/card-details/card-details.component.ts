@@ -34,7 +34,15 @@ export class CardDetailsComponent implements OnInit {
   navigateToMap() {
     const start = JSON.stringify(this.rideData.startCoordinates.coordinates);
     const end = JSON.stringify(this.rideData.endCoordinates.coordinates);
-    this.router.navigate(['/navigationForDetailsView', start, end]);
+    const isRider = false;
+    const id = JSON.stringify({ id: this.rideData._id });
+    this.router.navigate([
+      '/navigationForDetailsView',
+      start,
+      end,
+      isRider,
+      id,
+    ]);
   }
   makePayment() {
     this.isLoading = true;

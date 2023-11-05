@@ -6,6 +6,7 @@ import {
   findBookedRideByuser,
   findRegisterdRideByuser,
   getRide,
+  getRideByRideId,
 } from "./ride.service";
 import { Query } from "mongoose";
 
@@ -124,6 +125,25 @@ export const deletRide = async (
   const { rideId } = req.params;
   try {
     const rideData = await deletRideById(rideId);
+    return res.status(200).json({
+      status: "sucess",
+      data: rideData,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: "error",
+      error,
+    });
+  }
+};
+export const getSingelRide = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { rideId } = req.params;
+  try {
+    const rideData = await getRideByRideId(rideId);
     return res.status(200).json({
       status: "sucess",
       data: rideData,

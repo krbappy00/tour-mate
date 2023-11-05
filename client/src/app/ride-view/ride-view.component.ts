@@ -48,12 +48,9 @@ export class RideViewComponent implements OnInit {
     });
     if (this.searchRideData === null || this.searchRideData.length == 0) {
       const ride: any = localStorage.getItem('rideData');
-      console.log(ride);
       const obj = JSON.parse(ride);
-      console.log(obj);
       this.searchRideData = obj;
     }
-
   }
   navigateToCardView(rideData: any) {
     rideData.searchSeatQuantity = 1;

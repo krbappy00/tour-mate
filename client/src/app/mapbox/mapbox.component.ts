@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import * as mapboxgl from 'mapbox-gl';
+import mapboxgl from 'mapbox-gl';
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 
 import { LocationService } from '../service/location/location.service';
@@ -44,7 +44,7 @@ export class MapboxComponent implements OnInit {
       accessToken:
         'pk.eyJ1IjoiYXNpZnVycmFobWFucGlhbCIsImEiOiJjbG9oaG0zMnQxZDVhMm1yd3c1bTVwZWQ4In0.HjT23K3i1ur6Jy9KaikNEw',
       container: 'map',
-      style: 'mapbox://styles/asifurrahmanpial/clo1vea6q00hg01pfb6211d74',
+      style: 'mapbox://styles/mapbox/streets-v12',
       center: this.initialCenter,
       zoom: 15,
     });

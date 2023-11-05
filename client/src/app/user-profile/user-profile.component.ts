@@ -80,7 +80,6 @@ export class UserProfileComponent implements OnInit {
       });
   }
   cancelRide(ride: any) {
-    console.log(ride);
     this.http
       .delete(`http://localhost:5000/api/v1/ride/cancelRide/${ride._id}`)
       .subscribe((data: any) => {

@@ -5,6 +5,7 @@ import {
   getBookedRideByUser,
   getRideBySearch,
   getRideByUser,
+  getSingelRide,
   registerRide,
 } from "./ride.controller";
 import authentication from "../../middleware/authentication.middleware";
@@ -16,5 +17,6 @@ router.post("/bookedRide", bookedRide);
 router.get("/rideByuser", getRideByUser);
 router.get("/bookedRideByuser", getBookedRideByUser);
 router.delete("/cancelRide/:rideId", deletRide);
+router.get("/getRideById/:rideId", getSingelRide);
 
 export default router;

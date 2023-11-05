@@ -1,5 +1,5 @@
-<div *ngIf="riderProfileData" class="w-[40%] border mx-auto" >
-  <div class="flex gap-4">
+<div *ngIf="riderProfileData" class="w-[40%] mx-auto" >
+  <div class="flex gap-4 w-[80%] mx-auto bg-slate-100 rounded-xl p-8 mt-8 items-center">
     <div>
       <img class="w-64 h-64 rounded-xl object-cover" [src]="riderProfileData?.profile_pic_url ? riderProfileData?.profile_pic_url : '../../assets/userAvater.svg'" alt="">
     </div>
@@ -36,29 +36,71 @@
             <h1 class="text-tsec">* 4.5</h1>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <!-- <div>
-    <div class="flex justify-between items-center hover:bg-tthird hover:cursor-pointer mt-2 p-4 hover:rounded-xl">
-      <div class="">
-        <h1 class="text-tmain text-xl">{{riderProfileData?.name}}</h1>
-        <div class="flex gap-2 items-center">
-          <img src="../../assets/rating.svg" alt="">
-          <h1 class="text-tmain text-sm mt-1">4.5 Ratings outof 5</h1>
+        <div class="flex items-center gap-4 mt-4">
+          <button class="bg-white border-2 border-mblue text-mblue px-4 py-[6px] rounded-md">Follow</button>
+          <button class="bg-mblue text-white px-4 py-2 rounded-md">Message</button>
         </div>
       </div>
-      <img class="w-24 h-24 rounded-full border-[3px] border-mblue object-cover" [src]="riderProfileData?.profile_pic_url ? riderProfileData?.profile_pic_url : '../../assets/userAvater.svg'" alt="">
+    </div>
   </div>
-  <div class="px-4 mt-2">
-    <div class="flex gap-4 items-center">
-      <img src="../../assets/verify.svg" alt="">
-      <h1 class="text-tsec">Verified Profile</h1>
+  <div class="w-[80%] mx-auto bg-slate-100 rounded-xl p-4 mt-8 items-center">
+    <div class="[&>*]:p-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <img src="../../assets/riderIcon/behave.svg" alt="">
+          <h1 class="text-xl text-tmain ">Behaviour feedback:</h1>
+        </div>
+        <div class="w-[30%] bg-gray-200 rounded-full dark:bg-gray-700">
+          <div class="bg-[#2bb63d] text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" style="width: 95%"> 95%</div>
+        </div>
+      </div>
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <img src="../../assets/riderIcon/time.svg" alt="">
+          <h1 class="text-xl text-tmain ">Ontime feedback:</h1>
+        </div>
+        <div class="w-[30%] bg-gray-200 rounded-full dark:bg-gray-700">
+          <div class="bg-[#c4ac29] text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" style="width: 70%"> 70%</div>
+        </div>
+      </div>
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <img src="../../assets/riderIcon/price.svg" alt="">
+          <h1 class="text-xl text-tmain ">Fare feedback:</h1>
+        </div>
+        <div class="w-[30%] bg-gray-200 rounded-full dark:bg-gray-700">
+          <div class="bg-[#dd2d2d] text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" style="width: 40%"> 40%</div>
+        </div>
+      </div>
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <img src="../../assets/riderIcon/cancel.svg" alt="">
+          <h1 class="text-xl text-tmain ">No Cancel feedback:</h1>
+        </div>
+        <div class="w-[30%] bg-gray-200 rounded-full dark:bg-gray-700">
+          <div class="bg-[#2bb63d] text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" style="width: 100%"> 100%</div>
+        </div>
+      </div>
     </div>
-    <div class="flex gap-4 mt-4 items-center">
-      <img src="../../assets/rideNotCancel.svg" alt="">
-      <h1 class="text-tsec">Never cancels rides</h1>
+  </div>
+  <div class="w-[80%] mx-auto bg-slate-100 rounded-xl p-4 mt-8 items-center">
+    <div>
+      <div class="flex gap-4 justify-center items-center">
+        <div class="px-8 py-2 bg-mblue rounded-full flex items-center justify-center gap-2">
+          <img src="../../assets/riderBadge/safety.svg" alt="">
+          <h1 class="text-white">Safety</h1>
+        </div>
+        <div class="px-8 py-2 bg-mblue rounded-full flex items-center gap-2 justify-center">
+          <img src="../../assets/riderBadge/traffic.svg" alt="">
+          <h1 class="text-white">Traffic</h1>
+        </div>
+        <div class="px-8 py-2 bg-mblue rounded-full flex items-center gap-2 justify-center">
+          <img src="../../assets/riderBadge/slowdrive.svg" alt="">
+          <h1 class="text-white">Speed</h1>
+        </div>
+
+      </div>
     </div>
-  </div> -->
+  </div>
 
 </div>

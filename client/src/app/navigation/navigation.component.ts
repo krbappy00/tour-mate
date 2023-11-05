@@ -9,7 +9,7 @@ import {
   Renderer2,
   SimpleChanges,
 } from '@angular/core';
-import * as mapboxgl from 'mapbox-gl';
+import mapboxgl from 'mapbox-gl';
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 import { CoordinatesService } from '../service/coordinates.service';
 

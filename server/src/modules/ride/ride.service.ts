@@ -12,6 +12,7 @@ import mongoose from "mongoose";
 // import { fetch, setGlobalDispatcher, Agent } from 'undici'
 
 export const addRideToDb = async (rideData: Iride): Promise<Iride> => {
+  console.log(rideData);
   try {
     const ride = new Ride(rideData);
     await ride.save();

@@ -41,6 +41,9 @@ export class RideDetailsFormComponent implements OnInit {
     },
     startPlaceName: '',
     endPlaceName: '',
+    pickUpPoints1: [],
+    pickUpPoints2: [],
+    pickUpPoints3: [],
   };
 
   constructor(
@@ -55,7 +58,7 @@ export class RideDetailsFormComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      const id = params['id']; // Retrieve the id from the route parameter
+      const id = params['id'];
       this.startNav = JSON.parse(params['start']);
       this.endNav = JSON.parse(params['end']);
     });
@@ -73,11 +76,38 @@ export class RideDetailsFormComponent implements OnInit {
   viewNavigation() {
     const start = JSON.stringify(this.startNav);
     const end = JSON.stringify(this.endNav);
-    this.router.navigate(['/navigationForDetailsView', start, end]);
+    const isRider = true;
+    const id = JSON.stringify({ id: '0' });
+
+    this.router.navigate([
+      '/navigationForDetailsView',
+      start,
+      end,
+      isRider,
+      id,
+    ]);
   }
   onSubmit() {
     this.isLoading = true;
-    console.log(this.rideData.time);
+    const pickUpPoints1 = localStorage.getItem('pickUpPoints1');
+    if (pickUpPoints1) {
+      const pickUp = JSON.parse(pickUpPoints1);
+      this.rideData.pickUpPoints1 = pickUp.lngLat;
+      console.log(this.rideData.pickUpPoints1);
+    }
+    const pickUpPoints2 = localStorage.getItem('pickUpPoints2');
+    if (pickUpPoints2) {
+      const pickUp = JSON.parse(pickUpPoints2);
+      this.rideData.pickUpPoints2 = pickUp.lngLat;
+      console.log(this.rideData.pickUpPoints2);
+    }
+    const pickUpPoints3 = localStorage.getItem('pickUpPoints3');
+    if (pickUpPoints3) {
+      const pickUp = JSON.parse(pickUpPoints3);
+      this.rideData.pickUpPoints3 = pickUp.lngLat;
+      console.log(this.rideData.pickUpPoints3);
+    }
+
     const startPlaceName = localStorage.getItem('startPlaceName');
     const endPlaceName = localStorage.getItem('endPlaceName');
     const startCoordinates = localStorage.getItem('startCoordinates');
