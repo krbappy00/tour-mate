@@ -14,6 +14,9 @@
         and Privacy Policy.</span> </p>
         <p class="text-tsec">Already a member? <span class="text-mblue cursor-pointer" routerLink="/login">Log in</span></p>
     </div>
-    <button type="submit" class="w-full mt-6 h-16 text-white bg-mblue rounded-xl">Sign up</button>
+    <div class="relative">
+      <svg *ngIf="isLoading" class="absolute animate-spin h-6 w-6 top-[43px] left-[191px] mr-3 border-x-2 rounded-full text-white" viewBox="0 0 24 24"></svg>
+      <button type="submit" class="w-full mt-6 h-16 text-white bg-mblue rounded-xl">Sign up</button>
+    </div>
   </form>
 </div>

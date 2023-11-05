@@ -78,6 +78,7 @@ export class AddrideComponent {
     this.onStartHide = false;
     this.locationService.getStartLocation().subscribe((data: any) => {
       this.startLocation = data.placeName;
+      this.startCoordinates = data.coordinates;
       this.onStartHide = false;
     });
   }
@@ -89,6 +90,7 @@ export class AddrideComponent {
     this.onEndHide = false;
     this.locationService.getEndLocation().subscribe((data: any) => {
       this.endLocation = data.placeName;
+      this.endCoordinates = data.coordinates;
       this.onEndHide = false;
     });
   }

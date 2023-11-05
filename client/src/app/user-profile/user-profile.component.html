@@ -7,7 +7,7 @@
           <div class="w-[400px] bg-white p-12" >
             <div class="flex justify-center items-center flex-col">
               <div class="relative">
-                <img class="w-24 h-24 rounded-full object-cover" src="{{user.profile_pic_url}}" alt="profile_pic">
+                <img class="w-24 h-24 rounded-full object-cover border" src="{{user.profile_pic_url}}" >
                 <input class='mt-2 absolute top-24 text-white placeholder:text-tsec' name='image' (change)="handleImage($event)" accept="image/*" type="file" required>
               </div>
               <h1 class="text-tmain text-4xl font-semibold mt-12">{{user.name}}</h1>

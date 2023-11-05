@@ -18,6 +18,7 @@ export const registerUser = async (
 
   try {
     const { email, password } = req.body;
+    console.log(req.body);
 
     const alreadyHave = await getUserByEmailFromDB(email);
     if (alreadyHave) {

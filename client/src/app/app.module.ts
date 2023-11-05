@@ -31,6 +31,8 @@ import { DateCheckPipe } from 'src/pipe/date-check.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { RiderProfileComponent } from './rider-profile/rider-profile.component';
+import { HotToastModule, provideHotToastConfig } from '@ngneat/hot-toast';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,8 @@ import { RiderProfileComponent } from './rider-profile/rider-profile.component';
     HttpClientModule,
     RouterModule,
     BrowserAnimationsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
