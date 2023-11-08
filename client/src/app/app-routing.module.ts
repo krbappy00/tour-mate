@@ -14,6 +14,9 @@ import { CardDetailsComponent } from './card-details/card-details.component';
 import { NavigationForRideViewComponent } from './navigation-for-ride-view/navigation-for-ride-view.component';
 import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component';
 import { RiderProfileComponent } from './rider-profile/rider-profile.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { IsSuperAdmin } from './authGuard/isSuperAdmin';
+import { MessageComponent } from './message/message.component';
 
 const routes: Routes = [
   {
@@ -71,6 +74,16 @@ const routes: Routes = [
   {
     path: 'riderProfile/:id',
     component: RiderProfileComponent,
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [IsSuperAdmin],
+  },
+  {
+    path: 'messages',
+    component: MessageComponent,
+    canActivate: [AuthGuard],
   },
 ];
 

@@ -1,7 +1,147 @@
 <div>
   <div class="w-full h-[480px] mt-[] bg-no-repeat bg-cover bg-center relative " [ngStyle]="{'background-image': 'url(' + bg + ')'}">
-    <div class="absolute w-full top-[380px]">
+    <div class="absolute z-50 w-full top-[380px]">
       <app-search></app-search>
+    </div>
+  </div>
+
+  <!-- destination div start -->
+  <div class="w-full">
+    <div>
+      <div>
+        <div class="w-[60%] mx-auto">
+          <h1 class="text-tmain text-3xl pt-12 pb-8">The Most Popular destination right now</h1>
+          <div class="flex items-center gap-8">
+            <div (click)="handleCox()" class="bg-white  rounded-2xl h-16 w-full flex items-center justify-between hover:cursor-pointer border drop-shadow-md hover:shadow-2xl">
+              <div class="flex items-center gap-4">
+                <img class="w-24 h-16 rounded-l-2xl   border-l border-t border-b"  src="../../assets//destinationImg/coxs.jpg" alt="">
+                <div>
+                  <h1 class="text-tmain text-xl">Cox's Bazar</h1>
+                  <h1 class="text-tsec">Sea beach</h1>
+                </div>
+                <span *ngIf="isLoadingf" class="loader absolute right-[-35px] top-0"></span>
+
+              </div>
+            </div>
+            <div (click)="handleKuakata()" class="bg-white rounded-2xl h-16 w-full flex items-center justify-between hover:cursor-pointer border drop-shadow-md hover:shadow-2xl">
+              <div class="flex items-center gap-4">
+                <img class="w-24 h-16 rounded-l-2xl   border-l border-t border-b"  src="../../assets//destinationImg/kuakata.jpg" alt="">
+                <div>
+                  <h1 class="text-tmain text-xl">Kuakata</h1>
+                  <h1 class="text-tsec">Sea beach</h1>
+                </div>
+                <span *ngIf="isLoadingg" class="loader absolute right-[-35px] top-0"></span>
+
+              </div>
+            </div>
+            <div (click)="handleSundarban()" class="bg-white rounded-2xl h-16 w-full flex items-center justify-between hover:cursor-pointer border drop-shadow-md hover:shadow-2xl">
+              <div class="flex items-center gap-4">
+                <img class="w-24 h-16 rounded-l-2xl  border-l border-t border-b"  src="../../assets//destinationImg/sundarban.jpg" alt="">
+                <div>
+                  <h1 class="text-tmain text-xl">Sundarban</h1>
+                  <h1 class="text-tsec">Mangrove forest </h1>
+                </div>
+                <span *ngIf="isLoadingh" class="loader absolute right-[-35px] top-0"></span>
+              </div>
+            </div>
+          </div>
+          <div (click)="handleSylhet()" class="flex items-center gap-8 mt-12 pb-20">
+            <div class="bg-white rounded-2xl h-16 w-full flex items-center justify-between hover:cursor-pointer border drop-shadow-md hover:shadow-2xl">
+              <div class="flex items-center gap-4">
+                <img class="w-24 h-16 rounded-l-2xl  border-l border-t border-b"  src="../../assets//destinationImg/sylhet.jpg" alt="">
+                <div>
+                  <h1 class="text-tmain text-xl">Sylhet</h1>
+                  <h1 class="text-tsec">Tea garden</h1>
+                </div>
+                <span *ngIf="isLoadingk" class="loader absolute right-[-35px] top-0"></span>
+
+              </div>
+            </div>
+            <div (click)="handleBandarban()" class="bg-white rounded-2xl h-16 w-full flex items-center justify-between hover:cursor-pointer border drop-shadow-md hover:shadow-2xl">
+              <div class="flex items-center gap-4">
+                <img class="w-24 h-16 rounded-l-2xl border-l border-t border-b"  src="../../assets//destinationImg/bandraban.jpg" alt="">
+                <div>
+                  <h1 class="text-tmain text-xl">Bandarban</h1>
+                  <h1 class="text-tsec">Hill track</h1>
+                </div>
+                <span *ngIf="isLoadingj" class="loader absolute right-[-35px] top-0"></span>
+              </div>
+            </div>
+            <div (click)="handleSaint()" class="bg-white relative rounded-2xl h-16 w-full flex items-center justify-between hover:cursor-pointer border drop-shadow-md hover:shadow-2xl">
+              <div class="flex items-center gap-4">
+                <img class="w-24 h-16 rounded-l-2xl border-l border-t border-b"  src="../../assets//destinationImg/saint.jpg" alt="">
+                <div>
+                  <h1 class="text-tmain text-xl">St. Martin's</h1>
+                  <h1 class="text-tsec">Sea beach</h1>
+                </div>
+                <span *ngIf="isLoadingi" class="loader absolute right-[-35px] top-0"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bg-tmain  top ">
+    <div class="w-[60%] mx-auto">
+      <h1 class="text-white text-4xl pt-12 pb-8">Where do you want to go?</h1>
+      <div class="flex items-center gap-8">
+        <div (click)="handleDhakaChittagoan()" class="bg-white relative rounded-2xl h-16 w-full flex justify-center items-center p-8  hover:cursor-pointer">
+          <div class="flex items-center gap-4">
+            <h1 class="text-tmain text-xl">Dhaka</h1>
+              <img  src="../../assets/locationMark.svg" alt="">
+            <h1 class="text-tmain text-xl">Chittagong</h1>
+          </div>
+          <span *ngIf="isLoading" class="loader absolute right-[-35px] top-0"></span>
+        </div>
+        <div (click)="handleDhakaSylhet()" class="bg-white rounded-2xl h-16 w-full flex items-center p-8 justify-center hover:cursor-pointer">
+          <div class="flex items-center gap-4">
+            <h1 class="text-tmain text-xl">Dhaka</h1>
+              <img  src="../../assets/locationMark.svg" alt="">
+            <h1 class="text-tmain text-xl">Sylhet</h1>
+          </div>
+          <span *ngIf="isLoadingB" class="loader absolute right-[-35px] top-0"></span>
+
+        </div>
+        <div (click)="handleDhakaRangpur()" class="bg-white rounded-2xl h-16 w-full flex items-center p-8 justify-center hover:cursor-pointer">
+          <div class="flex items-center gap-4">
+            <h1 class="text-tmain text-xl">Dhaka</h1>
+              <img  src="../../assets/locationMark.svg" alt="">
+            <h1 class="text-tmain text-xl">Rangpur</h1>
+          </div>
+          <span *ngIf="isLoadingA" class="loader absolute right-[-35px] top-0"></span>
+
+        </div>
+      </div>
+      <div class="flex items-center gap-8 mt-12 pb-20">
+        <div (click)="handleDhakaRajshahi()" class="bg-white rounded-2xl h-16 w-full flex items-center p-8 justify-center hover:cursor-pointer">
+          <div class="flex items-center gap-4">
+            <h1 class="text-tmain text-xl">Dhaka</h1>
+              <img  src="../../assets/locationMark.svg" alt="">
+            <h1 class="text-tmain text-xl">Rajshahi</h1>
+          </div>
+          <span *ngIf="isLoadingC" class="loader absolute right-[-35px] top-0"></span>
+
+        </div>
+        <div (click)="handleDhakaCox()" class="bg-white rounded-2xl h-16 w-full flex items-center p-8 justify-center hover:cursor-pointer">
+          <div class="flex items-center gap-4">
+            <h1 class="text-tmain text-xl">Dhaka</h1>
+              <img  src="../../assets/locationMark.svg" alt="">
+            <h1 class="text-tmain text-xl">Cox's bazar</h1>
+          </div>
+          <span *ngIf="isLoadingD" class="loader absolute right-[-35px] top-0"></span>
+
+        </div>
+        <div (click)="handleDhakaNoakhali()" class="bg-white rounded-2xl h-16 w-full flex items-center p-8 justify-center hover:cursor-pointer">
+          <div class="flex items-center gap-4">
+            <h1 class="text-tmain text-xl">Dhaka</h1>
+              <img  src="../../assets/locationMark.svg" alt="">
+            <h1 class="text-tmain text-xl">Noakhali</h1>
+          </div>
+          <span *ngIf="isLoadingE" class="loader absolute right-[-35px] top-0"></span>
+
+        </div>
+      </div>
     </div>
   </div>
 </div>

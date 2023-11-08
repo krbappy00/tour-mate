@@ -10,10 +10,9 @@
         <div>
           <button (click)="viewNavigation()" class="px-4  mt-6 h-16 text-white bg-mblue rounded-xl">
             <div class="flex items-center gap-2">
-              <svg width="23" height="27" viewBox="0 0 23 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M21.5 9.80769C21.5 14.4046 11.5 25.5 11.5 25.5C11.5 25.5 1.5 14.4046 1.5 9.80769C1.5 7.60436 2.55357 5.49126 4.42893 3.93327C6.3043 2.37527 8.84784 1.5 11.5 1.5C14.1522 1.5 16.6957 2.37527 18.5711 3.93327C20.4464 5.49126 21.5 7.60436 21.5 9.80769Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M11.5 12.5769C13.341 12.5769 14.8333 11.3371 14.8333 9.80769C14.8333 8.27829 13.341 7.03846 11.5 7.03846C9.65905 7.03846 8.16667 8.27829 8.16667 9.80769C8.16667 11.3371 9.65905 12.5769 11.5 12.5769Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.2 0H2.4V2.4H0V1.2C0 0.54 0.54 0 1.2 0ZM20.4 0C21.06 0 21.6 0.54 21.6 1.2V2.4H19.2V0H20.4ZM14.4 2.4V0H16.8V2.4H14.4ZM9.6 2.4V0H12V2.4H9.6ZM4.8 2.4V0H7.2V2.4H4.8ZM9.6 21.6V19.2H12V21.6H9.6ZM4.8 21.6V19.2H7.2V21.6H4.8ZM1.2 21.6C0.54 21.6 0 21.06 0 20.4V19.2H2.4V21.6H1.2ZM0 14.4H2.4V16.8H0V14.4ZM0 9.6H2.4V12H0V9.6ZM0 4.8H2.4V7.2H0V4.8ZM21.6 4.8V7.2H19.2V4.8H21.6ZM19.8 12C22.08 12 24 13.92 24 16.2C24 19.32 19.8 24 19.8 24C19.8 24 15.6 19.32 15.6 16.2C15.6 13.92 17.52 12 19.8 12ZM19.8 17.76C20.64 17.76 21.36 17.04 21.24 16.32C21.24 15.6 20.52 14.88 19.8 14.88C19.08 14.88 18.36 15.48 18.36 16.32C18.36 17.04 18.96 17.76 19.8 17.76Z" fill="white"/>
+                </svg>
               <h1 class="text-white">
                 Set pickup point
               </h1>
@@ -35,8 +34,12 @@
           <h1 class="mb-1 text-tsec text-xl">Available seats</h1>
           <input type="number" min="0" [(ngModel)]="rideData.seat" class="w-full mb-6 p-4 h-16 rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="seat" placeholder="Number of seats">
         </div>
-        <div class="w-full">
-          <h1 class="mb-1 text-tsec text-xl">Set your price per seat</h1>
+        <div class="w-full relative">
+          <div class="bg-[#409725] absolute top-0  px-4 rounded-full">
+            <h1 class="text-white ">Estimated price: {{this.suggestedPrice}}</h1>
+          </div>
+          <h1 class="mb-1 text-tsec text-xl">Price per seat</h1>
+
           <input type="number" [(ngModel)]="rideData.price" class="w-full mb-6 p-4 h-16 rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="price" placeholder="$" >
         </div>
       </div>

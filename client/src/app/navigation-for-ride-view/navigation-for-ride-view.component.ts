@@ -60,6 +60,7 @@ export class NavigationForRideViewComponent implements OnInit {
         lngLat: [startLng + offset, startLat + offset],
         name: 'Pickup Point 1',
       },
+
       {
         lngLat: [startLng - offset, startLat + offset],
         name: 'Pickup Point 2',

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -33,6 +33,9 @@ import { TooltipModule } from 'ng2-tooltip-directive';
 import { RiderProfileComponent } from './rider-profile/rider-profile.component';
 import { HotToastModule, provideHotToastConfig } from '@ngneat/hot-toast';
 import { ToastrModule } from 'ngx-toastr';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MessageComponent } from './message/message.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -55,6 +58,8 @@ import { ToastrModule } from 'ngx-toastr';
     ThankYouPageComponent,
     DateCheckPipe,
     RiderProfileComponent,
+    DashboardComponent,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +72,12 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserAnimationsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -19,6 +19,7 @@ export class LoginComponent {
     email: '',
     password: '',
   };
+  isLoading = false;
   constructor(
     private http: HttpClient,
     private authService: AuthService,
@@ -26,11 +27,14 @@ export class LoginComponent {
     private router: Router
   ) {}
   onLogin() {
+    this.isLoading = true;
     this.http.post(this.baseUrl, this.formData).subscribe({
       next: (data: any) => {
         this.authService.setToken(data.token);
         this.userService.setUser(data.data);
+        
         if (data.status === 'success') {
+          this.isLoading = false;
           this.router.navigate(['']);
         }
       },

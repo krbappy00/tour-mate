@@ -12,7 +12,11 @@ import { timestamp } from 'rxjs';
   styleUrls: ['./ride-details-form.component.css'],
 })
 export class RideDetailsFormComponent implements OnInit {
-  [x: string]: any;
+  mapboxAccessToken =
+    'pk.eyJ1IjoiYXNpZnVycmFobWFucGlhbCIsImEiOiJjbG5qd29ldTEwMjdsMnBsazFsaW1xcm5rIn0.L5kKxav_0VTewsxlvWUS2g';
+  // [x: string]: any;
+  rideDistance: any;
+  travelProfile = 'mapbox/driving';
   @Input() startCoordinates!: [number, number];
   @Input() endCoordinates!: [number, number];
   startNav!: [number, number];
@@ -20,14 +24,17 @@ export class RideDetailsFormComponent implements OnInit {
   isLoading = false;
   minDate: string;
   date = new Date();
+  estimatedPrice: number = 0;
+  suggestedPrice = 0;
   baseUrl = 'http://localhost:5000/api/v1/ride/register-ride';
+
   // RIDE FORM INPUT
   rideData: any = {
     userId: '',
     date: new Date(),
     time: '',
     seat: 0,
-    price: 0,
+    price: this.estimatedPrice,
     allowPet: false,
     allowSmoking: false,
     allowAlcohol: false,
@@ -62,6 +69,45 @@ export class RideDetailsFormComponent implements OnInit {
       this.startNav = JSON.parse(params['start']);
       this.endNav = JSON.parse(params['end']);
     });
+    if (this.startNav && this.endNav) {
+      const rideStartCoordinates = `${this.startNav[0]},${this.startNav[1]}`;
+      const rideEndCoordinates = `${this.endNav[0]},${this.endNav[1]}`;
+      const rideDistanceUrl = `https://api.mapbox.com/directions/v5/${this.travelProfile}/${rideStartCoordinates};${rideEndCoordinates}?access_token=${this.mapboxAccessToken}`;
+      this.http.get(rideDistanceUrl).subscribe((data: any) => {
+        this.rideDistance = data.routes[0].distance / 1000;
+        if (this.rideDistance < 10) {
+          this.estimatedPrice = this.rideDistance * 15;
+        }
+        if (this.rideDistance > 10 && this.rideDistance < 20) {
+          this.estimatedPrice = this.rideDistance * 12;
+        }
+        if (this.rideDistance > 20 && this.rideDistance < 30) {
+          this.estimatedPrice = this.rideDistance * 10;
+        }
+        if (this.rideDistance > 30 && this.rideDistance < 40) {
+          this.estimatedPrice = this.rideDistance * 8;
+        }
+        if (this.rideDistance > 40 && this.rideDistance < 50) {
+          this.estimatedPrice = this.rideDistance * 6;
+        }
+        if (this.rideDistance > 50 && this.rideDistance < 60) {
+          this.estimatedPrice = this.rideDistance * 5;
+        }
+        if (this.rideDistance > 60 && this.rideDistance < 70) {
+          this.estimatedPrice = this.rideDistance * 4;
+        }
+        if (this.rideDistance > 70 && this.rideDistance < 80) {
+          this.estimatedPrice = this.rideDistance * 3;
+        }
+        if (this.rideDistance > 80 && this.rideDistance < 1090) {
+          this.estimatedPrice = this.rideDistance * 2.5;
+        }
+        // const price = parseInt(this.estimatedPrice);
+
+        this.rideData.price = this.estimatedPrice - (this.estimatedPrice % 10);
+        this.suggestedPrice = this.estimatedPrice - (this.estimatedPrice % 10);
+      });
+    }
 
     this.locationService.setMapLoad(true);
     this.locationService.getStartLocation().subscribe((data: any) => {

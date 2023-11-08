@@ -4,4 +4,5 @@ export interface IUser {
   email: string;
   password: string;
   profile_pic_url?: string;
+  isSuperAdmin?: boolean;
 }
