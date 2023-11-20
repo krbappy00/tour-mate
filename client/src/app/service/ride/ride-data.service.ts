@@ -27,4 +27,5 @@ export class RideDataService {
     // }
     return this.rideSearchSubject.asObservable();
   }
+  setOwnRegisterdRide() {}
 }

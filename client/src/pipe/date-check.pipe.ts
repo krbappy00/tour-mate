@@ -15,13 +15,13 @@ export class DateCheckPipe implements PipeTransform {
     if (targetDate.toDateString() === currentDate.toDateString()) {
       if (hoursDiff > 0) {
         if (minutesDiff > 0) {
-          return `${hoursDiff} hour${
-            hoursDiff > 1 ? 's' : ''
-          } ${minutesDiff} minute${minutesDiff > 1 ? 's' : ''} left`;
+          return `${hoursDiff} h${hoursDiff > 1 ? 's' : ''} ${minutesDiff} m${
+            minutesDiff > 1 ? 's' : ''
+          } left`;
         }
-        return `${hoursDiff} hour${hoursDiff > 1 ? 's' : ''} left`;
+        return `${hoursDiff} h${hoursDiff > 1 ? 's' : ''} left`;
       } else if (minutesDiff > 0) {
-        return `${minutesDiff} minute${minutesDiff > 1 ? 's' : ''} left`;
+        return `${minutesDiff} m${minutesDiff > 1 ? 's' : ''} left`;
       } else {
         return 'Less than a minute left';
       }

@@ -43,11 +43,75 @@ export const setProfilePicture = async (
     throw err;
   }
 };
-export const getAllUserFromDb = (): string => {
+export const getAllUserFromDb = async (): Promise<any> => {
   try {
-    // const alluser = await User.find();
-    return "url hit";
+    const alluser = await User.find();
+    return alluser;
   } catch (err) {
     throw err;
   }
+};
+export const addMessageToDb = async (messages: any): Promise<any> => {
+  try {
+    const { recevierId, senderId, message, senderName } = messages;
+    const user = await User.findByIdAndUpdate(
+      recevierId,
+      {
+        $push: {
+          messages: {
+            senderName: senderName,
+            senderId: senderId,
+            text: message,
+          },
+        },
+      },
+      { new: true }
+    );
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    console.log(user);
+    return user;
+  } catch (err) {
+    throw err;
+  }
+};
+export const getAllMessagesByuserId = async (params: string): Promise<any> => {
+  console.log("from message controller", params);
+  try {
+    const user = await User.findById({ _id: params });
+    if (user) {
+      const pipeline = [
+        { $unwind: "$messages" }, // Unwind the messages array
+        {
+          $group: {
+            _id: "$messages.senderId",
+            allTexts: { $push: "$messages.text" },
+            allMessages: { $push: "$messages" },
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            senderName: "$senderName",
+            senderId: "$_id",
+            allTexts: 1,
+            allMessages: 1,
+            myMessageTosender: {
+              $cond: {
+                if: {
+                  $in: [user._id, "$allMessages.senderId"],
+                },
+                then: true,
+                else: false,
+              },
+            },
+          },
+        },
+      ];
+      const result = await User.aggregate(pipeline).exec();
+      return result;
+    }
+  } catch {}
 };

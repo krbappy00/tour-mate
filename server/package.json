@@ -24,7 +24,8 @@
     "node-fetch": "^3.3.2",
     "nodemon": "^3.0.1",
     "stripe": "^14.1.0",
-    "undici": "^5.27.0"
+    "undici": "^5.27.0",
+    "web-push": "^3.6.6"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

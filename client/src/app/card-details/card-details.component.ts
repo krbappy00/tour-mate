@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentService } from '../service/payment.service';
 import { UserService } from '../service/user/user.service';
+import { SwPush } from '@angular/service-worker';
 
 @Component({
   selector: 'app-card-details',
@@ -15,7 +16,8 @@ export class CardDetailsComponent implements OnInit {
     private router: Router,
     private payment: PaymentService,
     private http: HttpClient,
-    private userService: UserService
+    private userService: UserService,
+    private _swPush: SwPush
   ) {}
   currentUser: any = {};
   seat: number = 1;
@@ -30,7 +32,24 @@ export class CardDetailsComponent implements OnInit {
       const id = params['id'];
       this.rideData = JSON.parse(params['data']);
     });
+    this.requestSubscription();
   }
+  requestSubscription = () => {
+    if (!this._swPush.isEnabled) {
+      console.log('Notification is not enabled.');
+      return;
+    }
+
+    this._swPush
+      .requestSubscription({
+        serverPublicKey:
+          'BOIWtSfqFXtICkWqFgQG_vpkLtp9V-ZeJmTQXNoi00mmFjKurJhcTVG-osQMgRJa_WvlywyPJNQxXXYJwtC9MBE',
+      })
+      .then((_) => {
+        console.log(JSON.stringify(_));
+      })
+      .catch((_) => console.log);
+  };
   navigateToMap() {
     const start = JSON.stringify(this.rideData.startCoordinates.coordinates);
     const end = JSON.stringify(this.rideData.endCoordinates.coordinates);

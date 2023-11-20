@@ -9,6 +9,7 @@ import { getUserById } from "../user/user.service";
 import { Iride, SearchQuery, bookedRide } from "./ride.interface";
 import Ride, { BookedRide } from "./ride.models";
 import mongoose from "mongoose";
+import { sendNotification } from "../../utils/sendNotification";
 // import { fetch, setGlobalDispatcher, Agent } from 'undici'
 
 export const addRideToDb = async (rideData: Iride): Promise<Iride> => {
@@ -145,6 +146,18 @@ export const addBookedRideToDb = async (
   try {
     const bookedRide = new BookedRide(bookedInformation);
     await bookedRide.save();
+    const ride = await getRideByRideId(bookedRide.rideId);
+    console.log(ride.userId);
+    const user = await getUserById(ride.userId);
+    console.log(user);
+    console.log("FROM BOOKED RIDER", user.auth, user.endpoint, user.p256dh);
+    sendNotification(
+      user.endpoint,
+      user.auth,
+      user.p256dh,
+      "Your ride is booked!",
+      "You got a passanger, get ready for ride."
+    );
     return bookedRide;
   } catch (err) {
     throw err;
@@ -195,5 +208,188 @@ export const deletRideById = async (rideId: string): Promise<any> => {
   } catch (err) {
     console.error("Error deleting ride:", err);
     throw err;
+  }
+};
+
+export const getRideByLocationOnly = async (searchQuery: any): Promise<any> => {
+  Ride.collection.createIndex({ "startCoordinates.coordinates": "2dsphere" });
+  Ride.collection.createIndex({ "endCoordinates.coordinates": "2dsphere" });
+  const { startLongn, startLatn, endLongn, endLatn } = searchQuery;
+  const userStartCoordinates = [startLongn, startLatn];
+  const userEndCoordinates = [endLongn, endLatn];
+
+  try {
+    const maxDistanceInKilometers = 10;
+    const rides = await Ride.find({
+      startCoordinates: {
+        $geoWithin: {
+          $centerSphere: [userStartCoordinates, maxDistanceInKilometers / 6371],
+        },
+      },
+      endCoordinates: {
+        $geoWithin: {
+          $centerSphere: [userEndCoordinates, maxDistanceInKilometers / 6371],
+        },
+      },
+    })
+      .lean()
+      .exec();
+
+    const mapboxAccessToken =
+      "pk.eyJ1IjoiYXNpZnVycmFobWFucGlhbCIsImEiOiJjbG5qd29ldTEwMjdsMnBsazFsaW1xcm5rIn0.L5kKxav_0VTewsxlvWUS2g";
+    const travelProfile = "mapbox/driving";
+
+    const userStartCoordinatess = `${startLongn},${startLatn}`;
+    const userEndCoordinatess = `${endLongn},${endLatn}`;
+
+    const promises = rides.map(async (ride) => {
+      const rideStartCoordinates = `${ride.startCoordinates.coordinates[0]},${ride.startCoordinates.coordinates[1]}`;
+      const rideEndCoordinates = `${ride.endCoordinates.coordinates[0]},${ride.endCoordinates.coordinates[1]}`;
+      const userToStartURL = `https://api.mapbox.com/directions/v5/${travelProfile}/${userStartCoordinatess};${rideStartCoordinates}?access_token=${mapboxAccessToken}`;
+      const userToEndURL = `https://api.mapbox.com/directions/v5/${travelProfile}/${userEndCoordinatess};${rideEndCoordinates}?access_token=${mapboxAccessToken}`;
+
+      try {
+        const rideStartCoordinates = `${ride.startCoordinates.coordinates[0]},${ride.startCoordinates.coordinates[1]}`;
+        const rideEndCoordinates = `${ride.endCoordinates.coordinates[0]},${ride.endCoordinates.coordinates[1]}`;
+        const rideDistanceUrl = `https://api.mapbox.com/directions/v5/${travelProfile}/${rideStartCoordinates};${rideEndCoordinates}?access_token=${mapboxAccessToken}`;
+
+        const rideDistance = await fetchData(rideDistanceUrl);
+        const sData = await fetchData(userToStartURL);
+        const eData = await fetchData(userToEndURL);
+        const estimateTime = addMinutesToTime(
+          ride.time,
+          rideDistance.routes[0].duration / 60
+        );
+        const estimateDuration = formatDurationToHoursAndMinutes(
+          rideDistance.routes[0].duration
+        );
+
+        if (sData.routes && sData.routes.length > 0) {
+          const distanceFromUserStart = sData.routes[0].distance / 1000;
+          const distanceFromUserEnd = eData.routes[0].distance / 1000;
+          const user = await getUserById(ride.userId);
+          const formateDate = dateFormate(ride.date);
+          return {
+            ...ride,
+            date: formateDate,
+            distance: rideDistance.routes[0].distance,
+            distanceFromUserStart: distanceFromUserStart,
+            distanceFromUserEnd: distanceFromUserEnd,
+            user: user,
+            estimateTime: estimateTime,
+            estimateDuration: estimateDuration,
+          };
+        } else {
+          throw new Error("No route data found");
+        }
+      } catch (error) {
+        console.error(
+          "Error calculating distance from user start to ride start:",
+          error
+        );
+        return ride;
+      }
+    });
+
+    const results = await Promise.all(promises);
+    return results;
+  } catch (error) {
+    console.error(
+      "Error calculating distance and time from user end to ride end:",
+      error
+    );
+  }
+};
+
+export const getRideByDestionation = async (searchQuery: any): Promise<any> => {
+  Ride.collection.createIndex({ "endCoordinates.coordinates": "2dsphere" });
+  const { startLongn, startLatn, endLongn, endLatn } = searchQuery;
+  const userStartCoordinates = [startLongn, startLatn];
+  const userEndCoordinates = [endLongn, endLatn];
+
+  try {
+    const maxDistanceInKilometers = 10;
+    const rides = await Ride.find({
+      endCoordinates: {
+        $geoWithin: {
+          $centerSphere: [userEndCoordinates, maxDistanceInKilometers / 6371],
+        },
+      },
+    })
+      .lean()
+      .exec();
+
+    const mapboxAccessToken =
+      "pk.eyJ1IjoiYXNpZnVycmFobWFucGlhbCIsImEiOiJjbG5qd29ldTEwMjdsMnBsazFsaW1xcm5rIn0.L5kKxav_0VTewsxlvWUS2g";
+    const travelProfile = "mapbox/driving";
+
+    const userStartCoordinatess = `${startLongn},${startLatn}`;
+    const userEndCoordinatess = `${endLongn},${endLatn}`;
+
+    const promises = rides.map(async (ride) => {
+      const rideStartCoordinates = `${ride.startCoordinates.coordinates[0]},${ride.startCoordinates.coordinates[1]}`;
+      const rideEndCoordinates = `${ride.endCoordinates.coordinates[0]},${ride.endCoordinates.coordinates[1]}`;
+      const userToStartURL = `https://api.mapbox.com/directions/v5/${travelProfile}/${userStartCoordinatess};${rideStartCoordinates}?access_token=${mapboxAccessToken}`;
+      const userToEndURL = `https://api.mapbox.com/directions/v5/${travelProfile}/${userEndCoordinatess};${rideEndCoordinates}?access_token=${mapboxAccessToken}`;
+
+      try {
+        const rideStartCoordinates = `${ride.startCoordinates.coordinates[0]},${ride.startCoordinates.coordinates[1]}`;
+        const rideEndCoordinates = `${ride.endCoordinates.coordinates[0]},${ride.endCoordinates.coordinates[1]}`;
+        const rideDistanceUrl = `https://api.mapbox.com/directions/v5/${travelProfile}/${rideStartCoordinates};${rideEndCoordinates}?access_token=${mapboxAccessToken}`;
+
+        const rideDistance = await fetchData(rideDistanceUrl);
+        const sData = await fetchData(userToStartURL);
+        const eData = await fetchData(userToEndURL);
+        const estimateTime = addMinutesToTime(
+          ride.time,
+          rideDistance.routes[0].duration / 60
+        );
+        const estimateDuration = formatDurationToHoursAndMinutes(
+          rideDistance.routes[0].duration
+        );
+
+        if (sData.routes && sData.routes.length > 0) {
+          const distanceFromUserStart = sData.routes[0].distance / 1000;
+          const distanceFromUserEnd = eData.routes[0].distance / 1000;
+          const user = await getUserById(ride.userId);
+          const formateDate = dateFormate(ride.date);
+          return {
+            ...ride,
+            date: formateDate,
+            distance: rideDistance.routes[0].distance,
+            distanceFromUserStart: distanceFromUserStart,
+            distanceFromUserEnd: distanceFromUserEnd,
+            user: user,
+            estimateTime: estimateTime,
+            estimateDuration: estimateDuration,
+          };
+        } else {
+          throw new Error("No route data found");
+        }
+      } catch (error) {
+        console.error(
+          "Error calculating distance from user start to ride start:",
+          error
+        );
+        return ride;
+      }
+    });
+
+    const results = await Promise.all(promises);
+    return results;
+  } catch (error) {
+    console.error(
+      "Error calculating distance and time from user end to ride end:",
+      error
+    );
+  }
+};
+
+export const findAllRide = async () => {
+  try {
+    const rides = await Ride.find();
+    return rides;
+  } catch (error) {
+    console.log(error);
   }
 };
