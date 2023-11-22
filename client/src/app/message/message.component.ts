@@ -28,9 +28,16 @@ export class MessageComponent implements OnInit {
           this.message.setMessage(data.data);
           this.messages = this.message.getMessage();
           console.log(this.messages);
+          if (this.messages) {
+            this.showMessage = this.messages.filter(
+              (m: any) => m?.senderName === 'Own message'
+            );
+          }
+          console.log(this.showMessage);
         });
     }
   }
+
   onClick(id: any) {
     console.log(id);
     this.showMessage = this.messages.find((m: any) => m.senderId === id);

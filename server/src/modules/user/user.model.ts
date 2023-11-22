@@ -4,6 +4,7 @@ const messageSchema = new Schema({
   senderId: { type: String, required: true, unique: false },
   senderName: { type: String, required: true, unique: false },
   recevierId: { type: String, required: true, unique: false },
+  recevierName: { type: String, required: false, unique: false },
   text: { type: String, required: true, unique: false },
   time: { type: Date, required: true, unique: false, default: Date.now },
 });

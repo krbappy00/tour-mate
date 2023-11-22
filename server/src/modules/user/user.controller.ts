@@ -18,8 +18,6 @@ export const registerUser = async (
   res: Response,
   next: NextFunction
 ) => {
-  // console.log("Router Hit")
-
   try {
     const { email, password } = req.body;
     const alreadyHave = await getUserByEmailFromDB(email);
@@ -57,13 +55,10 @@ export const loginUser = async (
   try {
     const { email, password } = req.body;
     if (!email || !password) throw new Error("null did not taken");
-    console.log(req.body);
-
     const userData = await getUserByEmailFromDB(email);
     if (!userData) throw new Error("email not exist");
 
     let isVerified = await checkPassword(password, userData.password);
-    // console.log(userData, isVerified);
     if (isVerified) {
       const user = await User.findByIdAndUpdate(
         userData._id,
@@ -74,7 +69,6 @@ export const loginUser = async (
         },
         { upsert: true, new: true }
       );
-      console.log(user);
     }
 
     if (!isVerified) {
@@ -104,7 +98,6 @@ export const updateProfilePicture = async (
 ) => {
   try {
     const { userId, url } = req.body;
-    console.log(userId, url);
     const user = await setProfilePicture(userId, url);
     return res.status(200).json({
       status: "success",
@@ -125,7 +118,6 @@ export const userById = async (
 ) => {
   try {
     const { userId } = req.query as Record<string, string>;
-    console.log(userId);
     const user = await getUserById(userId);
     const registerRide = await findRegisterdRideByuser(userId);
     return res.status(200).json({

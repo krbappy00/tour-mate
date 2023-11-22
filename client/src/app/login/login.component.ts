@@ -38,7 +38,19 @@ export class LoginComponent {
     this.isLoading = true;
     console.log('hit');
     if (!this.swPush.isEnabled) {
-      console.log('Notification is not enabled.');
+      this.http.post(this.baseUrl, this.formData).subscribe({
+        next: (data: any) => {
+          this.authService.setToken(data.token);
+          this.userService.setUser(data.data);
+          if (data.status === 'success') {
+            this.isLoading = false;
+            this.router.navigate(['']);
+          }
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
     } else {
       try {
         await this.swPush

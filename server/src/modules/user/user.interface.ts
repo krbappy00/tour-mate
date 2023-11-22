@@ -16,6 +16,7 @@ export interface Message {
   senderId: string;
   senderName: string;
   recevierId: string;
+  recevierName?: string;
   text: string;
   time: Date;
 }

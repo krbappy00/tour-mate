@@ -21,7 +21,6 @@ export const getUserByEmailFromDB = async (payload: string): Promise<any> => {
 export const getUserById = async (payload: string): Promise<any> => {
   try {
     const user = await User.findById({ _id: payload });
-    // console.log(user)
     return user as any;
   } catch (err) {
     throw err;
@@ -53,7 +52,26 @@ export const getAllUserFromDb = async (): Promise<any> => {
 };
 export const addMessageToDb = async (messages: any): Promise<any> => {
   try {
+    console.log(messages);
     const { recevierId, senderId, message, senderName } = messages;
+    const userName = await User.findById({ _id: recevierId });
+    const addMessageToSenderDb = await User.findByIdAndUpdate(
+      senderId,
+      {
+        $push: {
+          messages: {
+            senderName: "Own message",
+            recevierId: recevierId,
+            recevierName: userName?.name,
+            text: message,
+          },
+        },
+      },
+      { new: true }
+    );
+    if (!addMessageToSenderDb) {
+      throw new Error("User not found");
+    }
     const user = await User.findByIdAndUpdate(
       recevierId,
       {
@@ -70,48 +88,51 @@ export const addMessageToDb = async (messages: any): Promise<any> => {
     if (!user) {
       throw new Error("User not found");
     }
-
-    console.log(user);
     return user;
   } catch (err) {
     throw err;
   }
 };
 export const getAllMessagesByuserId = async (params: string): Promise<any> => {
-  console.log("from message controller", params);
   try {
     const user = await User.findById({ _id: params });
     if (user) {
-      const pipeline = [
-        { $unwind: "$messages" }, // Unwind the messages array
-        {
-          $group: {
-            _id: "$messages.senderId",
-            allTexts: { $push: "$messages.text" },
-            allMessages: { $push: "$messages" },
-          },
-        },
-        {
-          $project: {
-            _id: 0,
-            senderName: "$senderName",
-            senderId: "$_id",
-            allTexts: 1,
-            allMessages: 1,
-            myMessageTosender: {
-              $cond: {
-                if: {
-                  $in: [user._id, "$allMessages.senderId"],
-                },
-                then: true,
-                else: false,
-              },
-            },
-          },
-        },
-      ];
-      const result = await User.aggregate(pipeline).exec();
-      return result;
+      return user.messages;
     }
-  } catch {}
+
+    // if (user) {
+    //   const pipeline = [
+    //     { $unwind: "$messages" },
+    //     {
+    //       $group: {
+    //         _id: "$messages.senderId",
+    //         allTexts: { $push: "$messages.text" },
+    //         allMessages: { $push: "$messages" },
+    //       },
+    //     },
+    //     {
+    //       $project: {
+    //         _id: 0,
+    //         senderName: "$senderName",
+    //         senderId: "$_id",
+    //         allTexts: 1,
+    //         allMessages: 1,
+    //         myMessageTosender: {
+    //           $cond: {
+    //             if: {
+    //               $in: [user._id, "$allMessages.senderId"],
+    //             },
+    //             then: true,
+    //             else: false,
+    //           },
+    //         },
+    //       },
+    //     },
+    //   ];
+    //   const result = await User.aggregate(pipeline).exec();
+    //   return result;
+    // }
+  } catch (error) {
+    console.log(error);
+  }
 };
