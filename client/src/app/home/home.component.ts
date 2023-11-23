@@ -31,8 +31,9 @@ export class HomeComponent implements OnInit {
     private rideService: RideDataService,
     private router: Router
   ) {}
-  Url = 'http://localhost:5000/api/v1/ride/getRideByTwoLocation';
-  sUrl = 'http://localhost:5000/api/v1/ride/getRideBySingleSource';
+  Url = 'https://tour-mate-at6p.onrender.com/api/v1/ride/getRideByTwoLocation';
+  sUrl =
+    'https://tour-mate-at6p.onrender.com/api/v1/ride/getRideBySingleSource';
   ngOnInit(): void {}
 
   handleDhakaChittagoan() {
