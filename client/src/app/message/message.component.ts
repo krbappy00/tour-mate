@@ -21,9 +21,18 @@ export class MessageComponent implements OnInit {
     if (this.currentUser) {
       const params = new HttpParams().set('userId', this.currentUser._id);
       this.http
+<<<<<<< Updated upstream
         .get('http://localhost:5000/api/v1/user/get-all-messages', {
           params,
         })
+=======
+        .get(
+          'https://tour-mate-at6p.onrender.com/api/v1/user/get-all-messages',
+          {
+            params,
+          }
+        )
+>>>>>>> Stashed changes
         .subscribe((data: any) => {
           this.message.setMessage(data.data);
           this.messages = this.message.getMessage();

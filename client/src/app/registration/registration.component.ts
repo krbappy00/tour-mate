@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class RegistrationComponent implements OnInit {
   baseUrl = 'http://localhost:5000/api/v1/user/register-user';
+
   formData: IUser = {
     name: '',
     email: '',

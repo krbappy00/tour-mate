@@ -17,8 +17,14 @@ export class UserProfileComponent implements OnInit {
     private http: HttpClient,
     private router: Router
   ) {}
+<<<<<<< Updated upstream
   baseRideUrl = 'http://localhost:5000/api/v1/ride/rideByuser';
   baseBookedRideUrl = 'http://localhost:5000/api/v1/ride/bookedRideByuser';
+=======
+  baseRideUrl = 'https://tour-mate-at6p.onrender.com/api/v1/ride/rideByuser';
+  baseBookedRideUrl =
+    'https://tour-mate-at6p.onrender.com/api/v1/ride/bookedRideByuser';
+>>>>>>> Stashed changes
 
   ownRegisterdRide: any;
   isLoading = false;
@@ -54,7 +60,12 @@ export class UserProfileComponent implements OnInit {
   };
   cloud_name: string = 'drsbymkpw';
   preset_key: string = 'image_upload';
+<<<<<<< Updated upstream
   baseUrl = 'http://localhost:5000/api/v1/user/update-profilePicture';
+=======
+  baseUrl =
+    'https://tour-mate-at6p.onrender.com/api/v1/user/update-profilePicture';
+>>>>>>> Stashed changes
   handleImage(event: any) {
     const file = event.target.files[0];
     const formData = new FormData();
@@ -82,6 +93,7 @@ export class UserProfileComponent implements OnInit {
   cancelRide(ride: any) {
     this.http
       .delete(`http://localhost:5000/api/v1/ride/cancelRide/${ride._id}`)
+
       .subscribe((data: any) => {
         this.ownRegisterdRide = this.ownRegisterdRide.filter((r: any) => {
           return r._id !== ride._id;

@@ -2,8 +2,8 @@
   <app-search></app-search>
 </div>
 <div class="bg-[#F6F8F9] border-t mt-8">
-  <div class=" w-[60%] flex mx-auto">
-<!-- FILTER BY START -->
+  <div class="w-[60%] flex mx-auto">
+    <!-- FILTER BY START -->
 
     <div></div>
     <div class="w-[40%] mt-8 pr-20">
@@ -14,129 +14,250 @@
       <div class="[&>*]:mb-8 mt-8">
         <div class="flex justify-between items-center">
           <div class="flex gap-4 items-center">
-            <img src="../../assets/filterIcon/time.svg" alt="">
+            <img src="../../assets/filterIcon/time.svg" alt="" />
             <h1 class="text-tmain text-xl">Earliest departure</h1>
           </div>
-          <input checked (change)="onRadioChange($event)" [(ngModel)]="radioButtonValue" type="radio" name="radio" class="cursor-pointer appearance-none ring-2 ring-mblue ring-offset-4  checked:bg-mblue  w-4 h-4 rounded-full" name="time" value="time">
+          <input
+            checked
+            (change)="onRadioChange($event)"
+            [(ngModel)]="radioButtonValue"
+            type="radio"
+            name="radio"
+            class="cursor-pointer appearance-none ring-2 ring-mblue ring-offset-4 checked:bg-mblue w-4 h-4 rounded-full"
+            name="time"
+            value="time"
+          />
         </div>
         <div class="flex justify-between items-center">
           <div class="flex gap-4 items-center">
-            <img src="../../assets/filterIcon/money.svg" alt="">
+            <img src="../../assets/filterIcon/money.svg" alt="" />
             <h1 class="text-tmain text-xl">Lowest price</h1>
           </div>
-          <input checked (change)="onRadioChange($event)" [(ngModel)]="radioButtonValue" type="radio" name="radio" class="cursor-pointer appearance-none ring-2 ring-mblue ring-offset-4  checked:bg-mblue  w-4 h-4 rounded-full" name="price" value="price">
+          <input
+            checked
+            (change)="onRadioChange($event)"
+            [(ngModel)]="radioButtonValue"
+            type="radio"
+            name="radio"
+            class="cursor-pointer appearance-none ring-2 ring-mblue ring-offset-4 checked:bg-mblue w-4 h-4 rounded-full"
+            name="price"
+            value="price"
+          />
         </div>
         <div class="flex justify-between items-center">
           <div class="flex gap-4 items-center">
-            <img src="../../assets/filterIcon/road.svg" alt="">
+            <img src="../../assets/filterIcon/road.svg" alt="" />
             <h1 class="text-tmain text-xl">Shortest ride</h1>
           </div>
-          <input checked (change)="onRadioChange($event)" [(ngModel)]="radioButtonValue" type="radio" name="radio" class="cursor-pointer appearance-none ring-2 ring-mblue ring-offset-4  checked:bg-mblue  w-4 h-4 rounded-full" name="short_distance" value="distance">
+          <input
+            checked
+            (change)="onRadioChange($event)"
+            [(ngModel)]="radioButtonValue"
+            type="radio"
+            name="radio"
+            class="cursor-pointer appearance-none ring-2 ring-mblue ring-offset-4 checked:bg-mblue w-4 h-4 rounded-full"
+            name="short_distance"
+            value="distance"
+          />
         </div>
         <div class="flex justify-between items-center">
           <div class="flex gap-4 items-center">
-            <img src="../../assets/filterIcon/short_arri.svg" alt="">
+            <img src="../../assets/filterIcon/short_arri.svg" alt="" />
             <h1 class="text-tmain text-xl">Close to arrival point</h1>
           </div>
-          <input checked (change)="onRadioChange($event)" [(ngModel)]="radioButtonValue" type="radio" name="radio" class="cursor-pointer appearance-none ring-2 ring-mblue ring-offset-4  checked:bg-mblue  w-4 h-4 rounded-full" name="short_start" value="start_closest">
+          <input
+            checked
+            (change)="onRadioChange($event)"
+            [(ngModel)]="radioButtonValue"
+            type="radio"
+            name="radio"
+            class="cursor-pointer appearance-none ring-2 ring-mblue ring-offset-4 checked:bg-mblue w-4 h-4 rounded-full"
+            name="short_start"
+            value="start_closest"
+          />
         </div>
         <div class="flex justify-between items-center">
           <div class="flex gap-4 items-center">
-            <img src="../../assets/filterIcon/short_des.svg" alt="">
+            <img src="../../assets/filterIcon/short_des.svg" alt="" />
             <h1 class="text-tmain text-xl">Close to departure point</h1>
           </div>
-          <input checked (change)="onRadioChange($event)" [(ngModel)]="radioButtonValue" type="radio" name="radio" class="cursor-pointer appearance-none ring-2 ring-mblue ring-offset-4  checked:bg-mblue  w-4 h-4 rounded-full" name="short_end" value="end_closest">
+          <input
+            checked
+            (change)="onRadioChange($event)"
+            [(ngModel)]="radioButtonValue"
+            type="radio"
+            name="radio"
+            class="cursor-pointer appearance-none ring-2 ring-mblue ring-offset-4 checked:bg-mblue w-4 h-4 rounded-full"
+            name="short_end"
+            value="end_closest"
+          />
         </div>
-
       </div>
-
     </div>
-
-
 
     <div class="w-[60%] mt-8">
       <div class="mb-8 flex justify-between">
-        <h1 class="text-tmain text-xl font-semibold">{{searchRideData[0]?.date}}</h1>
+        <h1 class="text-tmain text-xl font-semibold">
+          {{ searchRideData[0]?.date }}
+        </h1>
         <div class="text-tsec flex gap-2 items-center">
-          <h1>{{serachRideStartEndName?.startLocation | split:',': 0}}</h1>
-          <img  src="../../assets/locationMark.svg" alt="">
-          <h1>{{serachRideStartEndName?.endLocation | split:',': 0}}</h1>
+          <h1>{{ serachRideStartEndName?.startLocation | split : "," : 0 }}</h1>
+          <img src="../../assets/locationMark.svg" alt="" />
+          <h1>{{ serachRideStartEndName?.endLocation | split : "," : 0 }}</h1>
         </div>
         <div>
-          <h1 class="text-tsec">{{searchRideData.length}} rides available</h1>
+          <h1 class="text-tsec">{{ searchRideData.length }} rides available</h1>
         </div>
       </div>
       <div class="">
         <div *ngFor="let ride of searchRideData">
-          <div (click)="navigateToCardView(ride)" [ngClass]="ride.booked? 'pointer-events-none relative border-tsec' : ''" class="border-mblue w-full rounded-xl shadow-md hover:shadow-2xl mb-4 border p-[24px] hover:cursor-pointer">
-            <h1 *ngIf="ride.booked" class="text-mblue font-semibold text-3xl text-center absolute right-[4%] top-[38%]">Booked</h1>
+          <div
+            (click)="navigateToCardView(ride)"
+            [ngClass]="
+              ride.booked ? 'pointer-events-none relative border-tsec' : ''
+            "
+            class="border-mblue w-full rounded-xl shadow-md hover:shadow-2xl mb-4 border p-[24px] hover:cursor-pointer"
+          >
+            <h1
+              *ngIf="ride.booked"
+              class="text-mblue font-semibold text-3xl text-center absolute right-[4%] top-[38%]"
+            >
+              Booked
+            </h1>
             <div class="flex justify-between">
               <div>
-                <div class="flex gap-4" [ngClass]="ride.booked? 'opacity-25' : ''">
+                <div
+                  class="flex gap-4"
+                  [ngClass]="ride.booked ? 'opacity-25' : ''"
+                >
                   <div class="">
-                    <h1 class="text-tmain text-xl">{{ride.time}}</h1>
-                    <h1 class="text-tsec text-sm">{{ride.estimateDuration}}</h1>
-                    <h1 class="text-tmain text-xl mt-10">{{ride.estimateTime}}</h1>
+                    <h1 class="text-tmain text-xl">{{ ride.time }}</h1>
+                    <h1 class="text-tsec text-sm">
+                      {{ ride.estimateDuration }}
+                    </h1>
+                    <h1 class="text-tmain text-xl mt-10">
+                      {{ ride.estimateTime }}
+                    </h1>
                   </div>
                   <div>
                     <div class="flex flex-col items-center justify-center">
-                      <div class="border-[4px] h-4 w-4 rounded-full border-tmain mt-[7px]"></div>
+                      <div
+                        class="border-[4px] h-4 w-4 rounded-full border-tmain mt-[7px]"
+                      ></div>
                       <div class="w-[4px] h-[73px] bg-tmain"></div>
-                      <div class="border-[4px] h-4 w-4 rounded-full border-tmain"></div>
+                      <div
+                        class="border-[4px] h-4 w-4 rounded-full border-tmain"
+                      ></div>
                     </div>
                   </div>
                   <div>
                     <div class="">
-                      <h1 class="text-tmain text-xl font-semibold">{{ ride.startPlaceName | split:',':0 }}</h1>
+                      <h1 class="text-tmain text-xl font-semibold">
+                        {{ ride.startPlaceName | split : "," : 0 }}
+                      </h1>
                       <div class="flex gap-2 mt-[16px]">
-                        <span class="flex gap-2" theme="light" tooltip="Available seat {{ride.seat - (ride.bookedSeat? ride.bookedSeat:0)}}" placement="top">
-                          <div *ngFor="let i of range(ride.seat - (ride.bookedSeat? ride.bookedSeat:0))">
+                        <span class="flex gap-2" theme="light" placement="top">
+                          <div
+                            *ngFor="
+                              let i of range(
+                                ride.seat -
+                                  (ride.bookedSeat ? ride.bookedSeat : 0)
+                              )
+                            "
+                          >
                             <div>
-                              <img src="../../assets/bookedSeat.svg" alt="">
+                              <img src="../../assets/bookedSeat.svg" alt="" />
                             </div>
                           </div>
-                      </span>
-                        <span class="flex gap-2" theme="light" tooltip="Booked seat {{ride.bookedSeat? ride.bookedSeat:0}}" placement="top">
-                          <div *ngFor="let i of range(ride.bookedSeat? ride.bookedSeat:0)">
+                        </span>
+                        <span class="flex gap-2" theme="light" placement="top">
+                          <div
+                            *ngFor="
+                              let i of range(
+                                ride.bookedSeat ? ride.bookedSeat : 0
+                              )
+                            "
+                          >
                             <div>
-                              <img src="../../assets/seat.svg" alt="">
+                              <img src="../../assets/seat.svg" alt="" />
                             </div>
                           </div>
-                      </span>
+                        </span>
                       </div>
-                      <h1 class="text-tmain text-xl mt-[15px] font-semibold">{{ ride.endPlaceName | split:',':0 }}</h1>
+                      <h1 class="text-tmain text-xl mt-[15px] font-semibold">
+                        {{ ride.endPlaceName | split : "," : 0 }}
+                      </h1>
                     </div>
                   </div>
-
                 </div>
               </div>
               <div>
-                <h1 class="text-tmain text-xl font-semibold" [ngClass]="ride.booked? 'opacity-25' : ''">${{ride.price}}</h1>
+                <h1
+                  class="text-tmain text-xl font-semibold"
+                  [ngClass]="ride.booked ? 'opacity-25' : ''"
+                >
+                  ${{ ride.price }}
+                </h1>
               </div>
             </div>
-            <div class="mt-4 flex justify-between items-center" [ngClass]="ride.booked? 'opacity-25' : ''">
-              <div class="flex gap-4 items-center " [ngClass]="ride.booked? 'opacity-25' : ''">
-                <img class="w-12 h-12 rounded-full border-[3px] border-mblue" [src]="ride.user?.profile_pic_url ? ride.user.profile_pic_url : '../../assets/userAvater.svg'" alt="">
+            <div
+              class="mt-4 flex justify-between items-center"
+              [ngClass]="ride.booked ? 'opacity-25' : ''"
+            >
+              <div
+                class="flex gap-4 items-center"
+                [ngClass]="ride.booked ? 'opacity-25' : ''"
+              >
+                <img
+                  class="w-12 h-12 rounded-full border-[3px] border-mblue"
+                  [src]="
+                    ride.user?.profile_pic_url
+                      ? ride.user.profile_pic_url
+                      : '../../assets/userAvater.svg'
+                  "
+                  alt=""
+                />
                 <div class="">
-                  <h1 class="text-tmain text-xl">{{ride.user?.name}}</h1>
+                  <h1 class="text-tmain text-xl">{{ ride.user?.name }}</h1>
                   <div class="flex gap-2 items-center">
-                    <img src="../../assets/rating.svg" alt="">
+                    <img src="../../assets/rating.svg" alt="" />
                     <h1 class="text-tmain text-sm">4.5</h1>
                   </div>
-
                 </div>
               </div>
-              <div class="flex gap-4 items-center" [ngClass]="ride.booked? 'opacity-25' : ''">
-                  <img [src]="ride.allowPet ? '../../assets/allowPet.svg' : '../../assets/notPet.svg'" alt="">
-                  <img [src]="ride.allowAlcohol ? '../../assets/allowDrink.svg' : '../../assets/notDrink.svg'" alt="">
-                  <img [src]="ride.allowSmoking ? '../../assets/allowSmok.svg' : '../../assets/notSmok.svg'" alt="">
+              <div
+                class="flex gap-4 items-center"
+                [ngClass]="ride.booked ? 'opacity-25' : ''"
+              >
+                <img
+                  [src]="
+                    ride.allowPet
+                      ? '../../assets/allowPet.svg'
+                      : '../../assets/notPet.svg'
+                  "
+                  alt=""
+                />
+                <img
+                  [src]="
+                    ride.allowAlcohol
+                      ? '../../assets/allowDrink.svg'
+                      : '../../assets/notDrink.svg'
+                  "
+                  alt=""
+                />
+                <img
+                  [src]="
+                    ride.allowSmoking
+                      ? '../../assets/allowSmok.svg'
+                      : '../../assets/notSmok.svg'
+                  "
+                  alt=""
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
-
   </div>
 </div>

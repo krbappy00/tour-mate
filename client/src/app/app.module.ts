@@ -21,15 +21,11 @@ import { RideViewComponent } from './ride-view/ride-view.component';
 import { CardDetailsComponent } from './card-details/card-details.component';
 import { SplitPipe } from 'src/pipe/split.pipe';
 import { NavigationForRideViewComponent } from './navigation-for-ride-view/navigation-for-ride-view.component';
-import {
-  NgxStripeElementLoadingTemplateDirective,
-  NgxStripeModule,
-} from 'ngx-stripe';
+
 import { environment } from 'environment';
 import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component';
 import { DateCheckPipe } from 'src/pipe/date-check.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TooltipModule } from 'ng2-tooltip-directive';
 import { RiderProfileComponent } from './rider-profile/rider-profile.component';
 import { HotToastModule, provideHotToastConfig } from '@ngneat/hot-toast';
 import { ToastrModule } from 'ngx-toastr';
@@ -65,8 +61,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    TooltipModule,
-    NgxStripeModule.forRoot(environment.stripe.publicKey),
     HttpClientModule,
     RouterModule,
     BrowserAnimationsModule,

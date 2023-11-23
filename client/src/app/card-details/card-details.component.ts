@@ -23,7 +23,7 @@ export class CardDetailsComponent implements OnInit {
   seat: number = 1;
   rideData: any;
   paymentHandler: any = null;
-  baseUrl: string = 'http://localhost:5000/api/v1/ride/bookedRide';
+  baseUrl: string = 'https://tour-mate.cyclic.app/api/v1/ride/bookedRide';
   isLoading = false;
 
   ngOnInit() {
