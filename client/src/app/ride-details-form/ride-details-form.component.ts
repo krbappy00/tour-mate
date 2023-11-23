@@ -26,7 +26,7 @@ export class RideDetailsFormComponent implements OnInit {
   date = new Date();
   estimatedPrice: number = 0;
   suggestedPrice = 0;
-  baseUrl = 'http://localhost:5000/api/v1/ride/register-ride';
+  baseUrl = 'https://tour-mate-at6p.onrender.com/api/v1/ride/register-ride';
 
   // RIDE FORM INPUT
   rideData: any = {

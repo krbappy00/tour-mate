@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent implements OnInit {
-  baseUrl = 'http://localhost:5000/api/v1/user/register-user';
+  baseUrl = 'https://tour-mate-at6p.onrender.com/api/v1/user/register-user';
 
   formData: IUser = {
     name: '',

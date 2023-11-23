@@ -21,9 +21,12 @@ export class MessageComponent implements OnInit {
     if (this.currentUser) {
       const params = new HttpParams().set('userId', this.currentUser._id);
       this.http
-        .get('http://localhost:5000/api/v1/user/get-all-messages', {
-          params,
-        })
+        .get(
+          'https://tour-mate-at6p.onrender.com/api/v1/user/get-all-messages',
+          {
+            params,
+          }
+        )
 
         .subscribe((data: any) => {
           this.message.setMessage(data.data);

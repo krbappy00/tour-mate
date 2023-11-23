@@ -32,7 +32,7 @@ export class SearchComponent {
   seat = 1;
   date = new Date();
   // You can adjust the locale and format as needed
-  baseUrl = 'http://localhost:5000/api/v1/ride/search-ride';
+  baseUrl = 'https://tour-mate-at6p.onrender.com/api/v1/ride/search-ride';
 
   isLoading = false;
 

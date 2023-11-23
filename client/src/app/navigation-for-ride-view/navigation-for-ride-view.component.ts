@@ -43,7 +43,9 @@ export class NavigationForRideViewComponent implements OnInit {
       this.pickupPoints = this.generateInitialPickupPoints();
     } else {
       this.http
-        .get(`http://localhost:5000/api/v1/ride/getRideById/${this.id.id}`)
+        .get(
+          `https://tour-mate-at6p.onrender.com/api/v1/ride/getRideById/${this.id.id}`
+        )
         .subscribe((data: any) => {
           this.rideDataForPickUpPointCollection = data;
           this.pickupPoints = this.generateRidePickUpPoint();

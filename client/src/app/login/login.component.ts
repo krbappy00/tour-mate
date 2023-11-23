@@ -16,7 +16,7 @@ export interface FormData {
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  baseUrl = 'http://localhost:5000/api/v1/user/login';
+  baseUrl = 'https://tour-mate-at6p.onrender.com/api/v1/user/login';
 
   private readonly public_key =
     'BFSlTgd4jZQCf71quwfwrrjcsEGLAwJMVuaXEnIAJ4HLfkb1EEcSVDjWdUA-QUpVbX7TIq-UH6Ryob__vB5flJI';

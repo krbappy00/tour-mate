@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ThankYouPageComponent implements OnInit {
   constructor(private http: HttpClient) {}
-  url = 'http://localhost:5000/api/v1/ride/notification';
+  url = 'https://tour-mate-at6p.onrender.com/api/v1/ride/notification';
 
   ngOnInit(): void {
     this.http.get(this.url).subscribe((data) => {

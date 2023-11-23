@@ -17,7 +17,7 @@ export class RiderProfileComponent implements OnInit {
     private user: UserService
   ) {}
   id: string = '';
-  url: string = 'http://localhost:5000/api/v1/user/get-user';
+  url: string = 'https://tour-mate-at6p.onrender.com/api/v1/user/get-user';
 
   riderProfileData: any;
   isLoading = false;
@@ -44,7 +44,7 @@ export class RiderProfileComponent implements OnInit {
   onSend() {
     console.log(this.message);
     this.http
-      .post('http://localhost:5000/api/v1/user/send-message', {
+      .post('https://tour-mate-at6p.onrender.com/api/v1/user/send-message', {
         senderId: this.currentUser._id,
         senderName: this.currentUser.name,
         recevierId: this.id,
