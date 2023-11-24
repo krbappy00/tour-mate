@@ -1,0 +1,22 @@
+<div class="w-[550px] mx-auto mt-12">
+  <h1 class="text-tmain font-extrabold text-4xl pl-4">Sign Up</h1>
+  <h1 class="pl-4 mb-1 text-tsec text-xl">Enter your credentials to continue</h1>
+  <form class="p-4" action="" (ngSubmit)="onSubmit()">
+    <input [(ngModel)]="formData.name" class="mb-6 p-4 h-16 w-full rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" type="text" name="name " placeholder="Username" id="">
+    <input [(ngModel)]="formData.email" class="mb-6 p-4 h-16 w-full rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" type="email" name="email " placeholder="Email" id="">
+    <input [(ngModel)]="formData.phone" class="mb-6 p-4 h-16 w-full rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" type="phone" name="phone " placeholder="Phone number" id="">
+    <div class="flex gap-4">
+      <input [(ngModel)]="formData.password" class="mb-4 p-4 h-16 w-full rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" type="password" name="password " placeholder="Password" id="">
+      <input class="mb-4 p-4 h-16 w-full rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" type="password" name="confirmPassword " placeholder="Confirm password" id="">
+    </div>
+    <div>
+      <p class="text-tsec">By continuing you agree to our <span class="text-mblue cursor-pointer">Terms of Service
+        and Privacy Policy.</span> </p>
+        <p class="text-tsec">Already a member? <span class="text-mblue cursor-pointer" routerLink="/login">Log in</span></p>
+    </div>
+    <div class="relative">
+      <svg *ngIf="isLoading" class="absolute animate-spin h-6 w-6 top-[43px] left-[191px] mr-3 border-x-2 rounded-full text-white" viewBox="0 0 24 24"></svg>
+      <button type="submit" class="w-full mt-6 h-16 text-white bg-mblue rounded-xl">Sign up</button>
+    </div>
+  </form>
+</div>

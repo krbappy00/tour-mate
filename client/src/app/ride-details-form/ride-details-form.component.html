@@ -1,0 +1,68 @@
+<div class="w-[80%] mx-auto gap-24 mt-4">
+
+  <div class="w-[40%] mx-auto">
+    <form action="" (ngSubmit)="onSubmit()" class="">
+      <div class="flex justify-between items-center">
+        <div>
+          <h1 class="text-tmain font-extrabold text-4xl">Publish a ride</h1>
+          <h1 class="mb-1 text-tsec text-xl">Enter your ride details to continue</h1>
+        </div>
+        <div>
+          <button (click)="viewNavigation()" class="px-4  mt-6 h-16 text-white bg-mblue rounded-xl">
+            <div class="flex items-center gap-2">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.2 0H2.4V2.4H0V1.2C0 0.54 0.54 0 1.2 0ZM20.4 0C21.06 0 21.6 0.54 21.6 1.2V2.4H19.2V0H20.4ZM14.4 2.4V0H16.8V2.4H14.4ZM9.6 2.4V0H12V2.4H9.6ZM4.8 2.4V0H7.2V2.4H4.8ZM9.6 21.6V19.2H12V21.6H9.6ZM4.8 21.6V19.2H7.2V21.6H4.8ZM1.2 21.6C0.54 21.6 0 21.06 0 20.4V19.2H2.4V21.6H1.2ZM0 14.4H2.4V16.8H0V14.4ZM0 9.6H2.4V12H0V9.6ZM0 4.8H2.4V7.2H0V4.8ZM21.6 4.8V7.2H19.2V4.8H21.6ZM19.8 12C22.08 12 24 13.92 24 16.2C24 19.32 19.8 24 19.8 24C19.8 24 15.6 19.32 15.6 16.2C15.6 13.92 17.52 12 19.8 12ZM19.8 17.76C20.64 17.76 21.36 17.04 21.24 16.32C21.24 15.6 20.52 14.88 19.8 14.88C19.08 14.88 18.36 15.48 18.36 16.32C18.36 17.04 18.96 17.76 19.8 17.76Z" fill="white"/>
+                </svg>
+              <h1 class="text-white">
+                Set pickup point
+              </h1>
+            </div>
+
+          </button>
+        </div>
+      </div>
+      <div>
+        <h1 class="mb-1 text-tsec text-xl">Select a date</h1>
+        <input type="date" [min]="minDate" [(ngModel)]="rideData.date" class=" mb-6 p-4 h-16 w-full rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="date" placeholder="Select date" >
+      </div>
+      <div>
+        <h1 class="mb-1 text-tsec text-xl">Select a time</h1>
+        <input type="time" [(ngModel)]="rideData.time" class="mb-6 p-4 h-16 w-full rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="time" placeholder="Select time" >
+      </div>
+      <div class="flex items-center justify-between w-full gap-4">
+        <div class="w-full">
+          <h1 class="mb-1 text-tsec text-xl">Available seats</h1>
+          <input type="number" min="0" [(ngModel)]="rideData.seat" class="w-full mb-6 p-4 h-16 rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="seat" placeholder="Number of seats">
+        </div>
+        <div class="w-full relative">
+          <div class="bg-[#409725] absolute top-0  px-4 rounded-full">
+            <h1 class="text-white ">Estimated price: {{this.suggestedPrice}}</h1>
+          </div>
+          <h1 class="mb-1 text-tsec text-xl">Price per seat</h1>
+
+          <input type="number" [(ngModel)]="rideData.price" class="w-full mb-6 p-4 h-16 rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="price" placeholder="$" >
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex items-center justify-between gap-2">
+          <h1 class="mb-1 text-tsec text-xl">Allow pet?</h1>
+          <input type="checkbox" [(ngModel)]="rideData.allowPet" name="" class="ml-2 w-6 h-6 rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="pet" placeholder="" >
+        </div>
+        <div class="flex items-center">
+          <h1 class="mb-1 text-tsec text-xl">Allow smoking?</h1>
+          <input type="checkbox" [(ngModel)]="rideData.allowSmoking" name="" class="ml-2 w-6 h-6 rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="smoke" placeholder="" >
+        </div>
+        <div class="flex items-center">
+          <h1 class="mb-1 text-tsec text-xl">Allow alcohol?</h1>
+          <input type="checkbox" [(ngModel)]="rideData.allowAlcohol" name="" class="ml-2 w-6 h-6 rounded-xl bg-[#ededed] text-tmain placeholder:text-tsec focus:border-mblue focus:outline-none focus:border-2" name="alcohol" placeholder="" >
+        </div>
+      </div>
+      <div class="relative">
+        <svg *ngIf="isLoading" class="absolute animate-spin h-6 w-6 top-[42px] left-[160px] mr-3 border-x-2 rounded-full text-white" viewBox="0 0 24 24"></svg>
+        <button type="submit" class="w-full mt-6 h-16 text-white bg-mblue rounded-xl">Add ride</button>
+      </div>
+    </form>
+  </div>
+</div>
+

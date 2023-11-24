@@ -1,0 +1,36 @@
+<div class="border-b-2 w-screen h-[80px] items-center flex">
+  <div class="flex w-[80%] mx-auto justify-between mt-2">
+    <div routerLink="/" class="cursor-pointer">
+      <img src="../../assets/logo.svg" alt="">
+    </div>
+    <div class="flex items-center gap-4">
+      <div routerLink="viewRides" class="flex items-center cursor-pointer">
+        <img class="w-[40px] h-[40px]" src="../../assets/search.svg" alt="">
+        <p class="text-mblue">Search</p>
+      </div>
+      <div routerLink="/addride" class="flex items-center cursor-pointer">
+        <img class="w-[40px] h-[32px]" src="../../assets/add_circle_FILL0_wght200_GRAD0_opsz24.svg" alt="">
+        <p class="text-mblue">Publish a ride</p>
+      </div>
+      <div (click)="toggleMenu()" class="flex items-center" *ngIf="(userService.user$ | async) as user">
+        <img class="w-12 h-12 rounded-full border-[3px] border-mblue cursor-pointer object-cover" [src]="user?.profile_pic_url ? user?.profile_pic_url : '../../assets/accs.svg'" alt="">
+      </div>
+      <div  *ngIf="(userService.user$ | async) as user">
+        <div class="flex gap-4">
+          <h1 class="text-mblue">{{user.name}}</h1>
+          <img class="cursor-pointer" *ngIf="checkUser()" (click)="logOut()" src="../../assets/logout.svg" alt="">
+        </div>
+      </div>
+
+
+      <div *ngIf="isMenuopend" class="absolute top-20 right-48 w-56 h-32 bg-white text-tmain flex flex-col justify-between">
+        <div routerLink="/login" class="w-full h-full p-4 flex items-center hover:bg-mblue cursor-pointer hover:text-white">
+          <h1>Login</h1>
+        </div>
+        <div routerLink="/registration" class="w-full h-full flex items-center p-4 hover:bg-mblue cursor-pointer hover:text-white">
+          <h1>Registration</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

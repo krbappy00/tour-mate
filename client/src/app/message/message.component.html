@@ -1,0 +1,14 @@
+<div class="flex max-h-[calc(screen-80px)] min-w-full max-w-full">
+  <div class="w-[15%] min-h-[calc(100vh-80px)] bg-gray-100">
+    <div *ngFor="let message of messages">
+      <h1 (click)="onClick(message?.senderId)">
+        {{ message?.allMessages[0]?.senderName }}
+      </h1>
+    </div>
+  </div>
+  <div class="w-[90%]">
+    <div *ngFor="let m of showMessage?.allTexts">
+      <h1>{{ m }}</h1>
+    </div>
+  </div>
+</div>

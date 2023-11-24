@@ -1,0 +1,142 @@
+<div *ngIf="riderProfileData" class="w-[40%] mx-auto" >
+  <div class="flex gap-4 w-[80%] mx-auto bg-slate-100 rounded-xl p-8 mt-8 items-center">
+    <div>
+      <img class="w-64 h-64 rounded-xl object-cover" [src]="riderProfileData?.profile_pic_url ? riderProfileData?.profile_pic_url : '../../assets/userAvater.svg'" alt="">
+    </div>
+    <div>
+      <div class="">
+        <h1 class="text-tmain text-2xl font-semibold">{{riderProfileData?.name}}</h1>
+        <div class="flex items-center gap-2 mt-1 ">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.653253 12.9524C0.46175 13.1514 0.46175 13.4739 0.653253 13.6729C0.844757 13.8718 1.15525 13.8718 1.34675 13.6729L0.653253 12.9524ZM8.06066 5.25702L0.653253 12.9524L1.34675 13.6729L8.75416 5.97748L8.06066 5.25702Z" fill="#00AFF5"/>
+            <line x1="0.5" y1="-0.5" x2="1.63625" y2="-0.5" transform="matrix(-0.653593 0.759656 -0.731227 -0.679004 8.555 9.46494)" stroke="#00AFF5" stroke-linecap="round"/>
+            <line x1="0.5" y1="-0.5" x2="3.78159" y2="-0.5" transform="matrix(-0.652205 0.758042 -0.73279 -0.680455 7.81658 10.2763)" stroke="#00AFF5" stroke-linecap="round"/>
+            <line x1="0.5" y1="-0.5" x2="4.84973" y2="-0.5" transform="matrix(-0.664239 0.74752 -0.721738 -0.692167 4.5535 13.9647)" stroke="#00AFF5" stroke-linecap="round"/>
+            <line x1="0.5" y1="-0.5" x2="3.78159" y2="-0.5" transform="matrix(-0.652205 0.758042 -0.73279 -0.680455 10.7795 12.5431)" stroke="#00AFF5" stroke-linecap="round"/>
+            <line x1="0.5" y1="-0.5" x2="4.84973" y2="-0.5" transform="matrix(-0.664239 0.74752 -0.721738 -0.692167 7.51646 16.2314)" stroke="#00AFF5" stroke-linecap="round"/>
+            <line x1="0.5" y1="-0.5" x2="3.78159" y2="-0.5" transform="matrix(-0.652205 0.758042 -0.73279 -0.680455 13.7425 13.3126)" stroke="#00AFF5" stroke-linecap="round"/>
+            <line x1="0.5" y1="-0.5" x2="4.84973" y2="-0.5" transform="matrix(-0.664239 0.74752 -0.721738 -0.692167 10.4794 17.001)" stroke="#00AFF5" stroke-linecap="round"/>
+            <line x1="0.5" y1="-0.5" x2="3.78159" y2="-0.5" transform="matrix(-0.652205 0.758042 -0.73279 -0.680455 18.187 13.3126)" stroke="#00AFF5" stroke-linecap="round"/>
+            <line x1="0.5" y1="-0.5" x2="4.84973" y2="-0.5" transform="matrix(-0.664239 0.74752 -0.721738 -0.692167 14.9239 17.001)" stroke="#00AFF5" stroke-linecap="round"/>
+            <path d="M14.3333 1L15.8301 5.78565H20.6737L16.7551 8.74334L18.2519 13.529L14.3333 10.5713L10.4148 13.529L11.9115 8.74334L7.99296 5.78565H12.8366L14.3333 1Z" stroke="#00AFF5" stroke-linejoin="round"/>
+            </svg>
+          <h1 class="text-tsec">Rising star</h1>
+        </div>
+        <div class="flex gap-4 mt-4 bg-[#efefef] p-4 rounded-md">
+          <div>
+            <h1 class="text-tmain text-xl">Ride</h1>
+            <h1 class="text-tsec">{{totalRide? totalRide:0}}</h1>
+          </div>
+          <div>
+            <h1 class="text-tmain text-xl">Cancel ride</h1>
+            <h1 class="text-tsec">0</h1>
+          </div>
+          <div>
+            <h1 class="text-tmain text-xl">Ratings</h1>
+            <h1 class="text-tsec">* 4.5</h1>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 mt-4">
+          <button class="bg-white border-2 border-mblue text-mblue px-4 py-[6px] rounded-md">Follow</button>
+          <button (click)="sendMessage()" class="bg-mblue text-white px-4 py-2 rounded-md">Message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="w-[80%] mx-auto bg-slate-100 rounded-xl p-4 mt-8 items-center">
+    <div class="[&>*]:p-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <img src="../../assets/riderIcon/behave.svg" alt="">
+          <h1 class="text-xl text-tmain ">Behaviour feedback:</h1>
+        </div>
+        <div class="w-[30%] bg-gray-200 rounded-full dark:bg-gray-700">
+          <div class="bg-[#2bb63d] text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" style="width: 95%"> 95%</div>
+        </div>
+      </div>
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <img src="../../assets/riderIcon/time.svg" alt="">
+          <h1 class="text-xl text-tmain ">Ontime feedback:</h1>
+        </div>
+        <div class="w-[30%] bg-gray-200 rounded-full dark:bg-gray-700">
+          <div class="bg-[#c4ac29] text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" style="width: 70%"> 70%</div>
+        </div>
+      </div>
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <img src="../../assets/riderIcon/price.svg" alt="">
+          <h1 class="text-xl text-tmain ">Fare feedback:</h1>
+        </div>
+        <div class="w-[30%] bg-gray-200 rounded-full dark:bg-gray-700">
+          <div class="bg-[#dd2d2d] text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" style="width: 40%"> 40%</div>
+        </div>
+      </div>
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <img src="../../assets/riderIcon/cancel.svg" alt="">
+          <h1 class="text-xl text-tmain ">No Cancel feedback:</h1>
+        </div>
+        <div class="w-[30%] bg-gray-200 rounded-full dark:bg-gray-700">
+          <div class="bg-[#2bb63d] text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" style="width: 100%"> 100%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="w-[80%] mx-auto bg-slate-100 rounded-xl p-4 mt-8 items-center">
+    <div>
+      <div class="flex gap-4 justify-center items-center">
+        <div class="px-8 py-2 bg-mblue rounded-full flex items-center justify-center gap-2">
+          <img src="../../assets/riderBadge/safety.svg" alt="">
+          <h1 class="text-white">Safety</h1>
+        </div>
+        <div class="px-8 py-2 bg-mblue rounded-full flex items-center gap-2 justify-center">
+          <img src="../../assets/riderBadge/traffic.svg" alt="">
+          <h1 class="text-white">Traffic</h1>
+        </div>
+        <div class="px-8 py-2 bg-mblue rounded-full flex items-center gap-2 justify-center">
+          <img src="../../assets/riderBadge/slowdrive.svg" alt="">
+          <h1 class="text-white">Speed</h1>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+    <div class="relative w-auto my-6 mx-auto max-w-6xl">
+      <!--content-->
+      <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+        <!--header-->
+        <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+          <h3 class="text-3xl font-semibold text-tmain">
+            Message
+          </h3>
+          <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" (click)="toggleModal()">
+            <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+              ×
+            </span>
+          </button>
+        </div>
+        <!--body-->
+        <form action="" (ngSubmit)="onSend()">
+          <div class="p-8">
+            <textarea [(ngModel)]="message" class="outline-none border-2 rounded-xl text-tsec  p-4" name="Message" id="" cols="40" rows="10" placeholder="Type your message..."></textarea>
+          </div>
+        <!--footer-->
+          <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+            <button class="text-tsec background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="toggleModal()">
+              Close
+            </button>
+            <button type="submit" class="bg-mblue text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+              Send
+            </button>
+          </div>
+        </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showModal" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
+
